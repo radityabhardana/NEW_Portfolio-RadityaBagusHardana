@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raditya Bagus Hardana — Creative Developer & Designer</title>
+    <meta name="description" content="Portfolio resmi Raditya Bagus Hardana — Creative Frontend Developer & UI/UX Designer. Menggabungkan estetika visual modern, performa tinggi, dan interaktivitas mutakhir." />
+    <meta property="og:title" content="Raditya Bagus Hardana — Creative Developer & Designer" />
+    <meta property="og:description" content="Portfolio resmi Raditya Bagus Hardana. Inspired by moncy.dev & anjalisaputra.site." />
+    <meta property="og:type" content="website" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23c2a4ff'/><stop offset='100%' stop-color='%239333ea'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='%23050405'/><text x='50' y='68' font-family='sans-serif' font-size='56' font-weight='900' fill='url(%23g)' text-anchor='middle'>R</text></svg>" />
+    
+    <!-- Google Fonts: Space Grotesk (Display), Geist/Inter (Body), Caveat/Marck Script (Polaroid Handwriting), JetBrains Mono (Film Monospace) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+  <body>
+    <!-- Ambient Background Lighting -->
+    <div class="ambient-glow glow-top-left" aria-hidden="true"></div>
+    <div class="ambient-glow glow-top-right" aria-hidden="true"></div>
+    <div class="ambient-glow glow-center" aria-hidden="true"></div>
+    <div class="ambient-glow glow-bottom-right" aria-hidden="true"></div>
+    <div class="cursor-spotlight" id="cursorSpotlight" aria-hidden="true"></div>
+
+    <!-- Fixed Top Navigation (moncy.dev style) -->
+    <header class="site-header" id="siteHeader">
+      <div class="header-inner">
+        <!-- Logo Left -->
+        <a href="#hero" class="brand-logo" aria-label="Raditya Bagus Hardana Homepage">
+          <span class="logo-text">raditya<span class="logo-dot">.dev</span></span>
+        </a>
+
+        <!-- Center Email -->
+        <div class="header-center">
+          <button type="button" class="email-pill" id="quickCopyEmailBtn" title="Klik untuk salin email">
+            <span class="status-indicator"></span>
+            <span class="email-text">raditya.hardana@gmail.com</span>
+            <span class="copy-badge" id="copyBadge">Salin</span>
+          </button>
+        </div>
+
+        <!-- Right Nav Links -->
+        <nav class="header-nav" aria-label="Main Navigation">
+          <a href="#about" class="nav-item">ABOUT</a>
+          <a href="#work" class="nav-item">WORK</a>
+          <a href="#contact" class="nav-item">CONTACT</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka Menu">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <div class="mobile-drawer-inner">
+        <a href="#about" class="mobile-nav-link">ABOUT</a>
+        <a href="#work" class="mobile-nav-link">WORK</a>
+        <a href="#tech" class="mobile-nav-link">TECH STACK</a>
+        <a href="#contact" class="mobile-nav-link">CONTACT</a>
+        <div class="mobile-email-box">
+          <p class="mobile-email-label">Hubungi Langsung:</p>
+          <a href="mailto:raditya.hardana@gmail.com" class="mobile-email-val">raditya.hardana@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Left Social Bar (moncy.dev style) -->
+    <aside class="social-dock" aria-label="Social Links">
+      <div class="social-dock-track">
+        <a href="https://github.com/AFDAlKURNIAWAN" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub Profile">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn Profile">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X Profile">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram Profile">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+      </div>
+      <div class="social-dock-line"></div>
+    </aside>
+
+    <main class="page-container">
+      <!-- ================= HERO SECTION (Exact moncy.dev composition) ================= -->
+      <section class="hero-section" id="hero">
+        <div class="hero-grid">
+          <!-- Hero Left Column -->
+          <div class="hero-col hero-col-left">
+            <span class="hero-subtitle">Hello! I'm</span>
+            <h1 class="hero-title">
+              <span class="name-line">RADITYA</span>
+              <span class="name-line">BAGUS</span>
+              <span class="name-line">HARDANA</span>
+            </h1>
+          </div>
+
+          <!-- Hero Center: Visual Centerpiece with Violet Rim Glow & Interactive Tilt -->
+          <div class="hero-col hero-col-center">
+            <div class="avatar-stage-wrap" id="avatarStage">
+              <!-- Radial Glow behind avatar -->
+              <div class="avatar-aura-ring"></div>
+              <div class="avatar-halo-glow"></div>
+              
+              <!-- Avatar Card/Container -->
+              <div class="avatar-card" id="avatarCard">
+                <img 
+                  src="/assets/images/raditya-avatar.jpg" 
+                  alt="Raditya Bagus Hardana - Avatar" 
+                  class="avatar-character-img"
+                  loading="eager"
+                />
+                <!-- Subtle reflective overlay -->
+                <div class="avatar-light-sheen"></div>
+              </div>
+
+              <!-- Floating Tech Badges (moncy style 3D badges) -->
+              <div class="hero-badge badge-top-left" style="--delay: 0s;">
+                <span class="badge-icon">&lt;/&gt;</span>
+                <span class="badge-label">React</span>
+              </div>
+              <div class="hero-badge badge-top-right" style="--delay: 1.2s;">
+                <span class="badge-icon">⚡</span>
+                <span class="badge-label">Tailwind</span>
+              </div>
+              <div class="hero-badge badge-bottom-right" style="--delay: 2.4s;">
+                <span class="badge-icon">✦</span>
+                <span class="badge-label">Frontend</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Right Column -->
+          <div class="hero-col hero-col-right">
+            <span class="hero-subtitle">A Creative</span>
+            <div class="hero-roles">
+              <!-- Hollow violet outlined text -->
+              <div class="role-outline-text" aria-hidden="true">DESIGNER</div>
+              <!-- Solid bold white text -->
+              <div class="role-solid-text">DEVELOPER</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Bottom Bar -->
+        <div class="hero-bottom-bar">
+          <a href="#about" class="scroll-down-hint">
+            <span class="mouse-icon">
+              <span class="mouse-wheel"></span>
+            </span>
+            <span class="hint-text">SCROLL UNTUK EKSPLORASI</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ================= ABOUT SECTION (moncy.dev layout + anjalisaputra Polaroid Card) ================= -->
+      <section class="about-section" id="about">
+        <div class="section-container">
+          <div class="about-grid">
+            
+            <!-- LEFT: The Anjali Saputra Inspired Vintage Film Print / Polaroid Card -->
+            <div class="polaroid-wrapper">
+              <!-- Handwritten Script Overlap Badge "About" -->
+              <div class="script-badge" aria-hidden="true">About</div>
+              
+              <!-- Physical 3D Tilt Card Container -->
+              <div class="polaroid-card" id="polaroidCard">
+                <div class="polaroid-card-inner">
+                  <!-- FRONT SIDE OF FILM PRINT -->
+                  <div class="card-face card-front">
+                    <!-- Film Header -->
+                    <div class="film-header">
+                      <span class="film-meta-tag">ABOUT</span>
+                      <span class="film-meta-frame">FR 01</span>
+                    </div>
+
+                    <!-- Framed Photo Container with Authentic Kodak Borders -->
+                    <div class="film-photo-frame">
+                      <img 
+                        src="/assets/image-about-BrXzbdJB.webp" 
+                        alt="Raditya Bagus Hardana Photo" 
+                        class="film-photo-img" 
+                      />
+                      <div class="film-grain-overlay"></div>
+                    </div>
+
+                    <!-- Bio Content on White Card -->
+                    <div class="film-body">
+                      <h3 class="film-title">Tentang Saya</h3>
+                      <p class="film-desc">
+                        Frontend Developer yang berfokus pada <strong>Modern Web Development, Creative UI/UX, dan Responsive Architecture</strong>. Berkomitmen mengubah ide kompleks menjadi antarmuka digital yang bersih, interaktif, dan berkesan tinggi.
+                      </p>
+                      <div class="film-badge-row">
+                        <span class="film-pill">CREATIVE × FRONTEND × SOFTWARE</span>
+                      </div>
+                      <div class="film-footer">
+                        <span>Kodak Portra 400 · Frame 01</span>
+                        <span class="film-click-hint">Hover / Sentuh untuk Detail</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- BACK SIDE OF FILM PRINT (Authentic Studio Stamp like anjalisaputra) -->
+                  <div class="card-face card-back">
+                    <div class="card-back-content">
+                      <div class="back-stamp-badge">
+                        <div class="stamp-inner">
+                          <span class="stamp-year">TERCETAK 2026 · STUDIO RADITYA</span>
+                        </div>
+                      </div>
+                      <div class="back-circle-stamp">
+                        <div class="circle-stamp-inner">
+                          <span class="stamp-num">01</span>
+                          <span class="stamp-txt">FRAME</span>
+                        </div>
+                      </div>
+                      <div class="back-memo">
+                        <p class="memo-script">"fokus pada karya nyata, detail presisi, dan antarmuka yang bernyawa"</p>
+                        <p class="memo-date">· 2026 · Medan</p>
+                      </div>
+                      <p class="back-sub">BACK OF PRINT · 01/01 · RADITYA</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT: moncy.dev Style About Me Narrative -->
+            <div class="about-narrative">
+              <span class="section-tag-purple">ABOUT ME</span>
+              
+              <h2 class="about-statement">
+                I'm a creative developer & designer with a passion for blending technical expertise with creative edge. Driven by curiosity, I always try to explore and learn new skills.
+              </h2>
+              
+              <p class="about-secondary-text">
+                Saya percaya bahwa website bukan sekadar kumpulan kode, melainkan medium ekspresi visual dan solusi bisnis yang fungsional. Dari landing page imersif, sistem e-commerce cepat, hingga aplikasi web modular, saya mendedikasikan ketelitian pada setiap piksel dan logika kode.
+              </p>
+
+              <!-- Highlight Stats Bento -->
+              <div class="about-stats-row">
+                <div class="stat-card">
+                  <span class="stat-number">2+</span>
+                  <span class="stat-label">Tahun Fokus Web Development</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-number">LKS</span>
+                  <span class="stat-label">Provincial Web Tech Competitor</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-number">100%</span>
+                  <span class="stat-label">Dedikasi Performa & UI/UX</span>
+                </div>
+              </div>
+
+              <!-- About Actions -->
+              <div class="about-actions">
+                <a href="#work" class="btn-primary">
+                  <span>Lihat Proyek Saya</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#contact" class="btn-secondary">
+                  <span>Ajak Kolaborasi</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= WORK / PROJECTS SECTION (moncy.dev Clean Showcase) ================= -->
+      <section class="work-section" id="work">
+        <div class="section-container">
+          <div class="section-header-row">
+            <div>
+              <span class="section-tag-purple">SELECTED WORK</span>
+              <h2 class="section-title-white">FEATURED PROJECTS</h2>
+            </div>
+            <p class="section-subtitle-muted">
+              Koleksi karya web pilihan yang dirancang dengan performa cepat, estetika elegan, dan arsitektur kode bersih.
+            </p>
+          </div>
+
+          <!-- Project Bento Cards -->
+          <div class="projects-bento-grid">
+            
+            <!-- Project 1: Pesona Toba -->
+            <article class="project-bento-card featured-large" data-project-id="pesona-toba">
+              <div class="project-media-wrap">
+                <img 
+                  src="/assets/images/project-tourism.jpg" 
+                  alt="Pesona Toba - Tourism Destination Platform" 
+                  class="project-img" 
+                  loading="lazy"
+                />
+                <div class="project-media-gradient"></div>
+                <span class="project-tag-pill">Tourism & Culture</span>
+              </div>
+              <div class="project-info-wrap">
+                <div class="project-tech-badges">
+                  <span class="tech-chip">HTML5</span>
+                  <span class="tech-chip">CSS3</span>
+                  <span class="tech-chip">JavaScript</span>
+                  <span class="tech-chip">Responsive</span>
+                </div>
+                <h3 class="project-card-title">Pesona Toba — Tourism Destination Platform</h3>
+                <p class="project-card-desc">
+                  Landing page imersif dan responsif untuk mempromosikan pariwisata Danau Toba dengan tipografi elegan, galeri panorama, dan paket wisata terkurasi.
+                </p>
+                <div class="project-links-row">
+                  <a href="https://danau-toba.vercel.app" target="_blank" rel="noopener noreferrer" class="link-btn-glow" onclick="event.stopPropagation()">
+                    <span>Live Preview</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                  </a>
+                  <a href="https://github.com/AFDAlKURNIAWAN/Danau-toba" target="_blank" rel="noopener noreferrer" class="link-btn-ghost" onclick="event.stopPropagation()">
+                    <span>GitHub</span>
+                  </a>
+                  <button type="button" class="btn-detail-trigger" data-detail-id="pesona-toba">
+                    Detail ↗
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 2: Aurora Store -->
+            <article class="project-bento-card" data-project-id="aurora-store">
+              <div class="project-media-wrap">
+                <img 
+                  src="/assets/images/project-ecommerce.jpg" 
+                  alt="Aurora Store E-Commerce" 
+                  class="project-img" 
+                  loading="lazy"
+                />
+                <div class="project-media-gradient"></div>
+                <span class="project-tag-pill">E-Commerce App</span>
+              </div>
+              <div class="project-info-wrap">
+                <div class="project-tech-badges">
+                  <span class="tech-chip">React.js</span>
+                  <span class="tech-chip">Tailwind CSS</span>
+                  <span class="tech-chip">Framer Motion</span>
+                </div>
+                <h3 class="project-card-title">Aurora — Minimalist Modern E-Commerce</h3>
+                <p class="project-card-desc">
+                  Aplikasi toko online modern dengan katalog produk minimalis, filter harga interaktif, sistem keranjang belanja (cart drawer), dan checkout responsif.
+                </p>
+                <div class="project-links-row">
+                  <a href="https://ecommerce-self-kappa.vercel.app/" target="_blank" rel="noopener noreferrer" class="link-btn-glow" onclick="event.stopPropagation()">
+                    <span>Live Preview</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                  </a>
+                  <a href="https://github.com/AFDAlKURNIAWAN/Ecommerce" target="_blank" rel="noopener noreferrer" class="link-btn-ghost" onclick="event.stopPropagation()">
+                    <span>GitHub</span>
+                  </a>
+                  <button type="button" class="btn-detail-trigger" data-detail-id="aurora-store">
+                    Detail ↗
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 3: Raditya DevStudio -->
+            <article class="project-bento-card" data-project-id="raditya-devstudio">
+              <div class="project-media-wrap">
+                <img 
+                  src="/assets/images/project-agency.svg" 
+                  alt="Raditya DevStudio Digital Agency" 
+                  class="project-img" 
+                  loading="lazy"
+                />
+                <div class="project-media-gradient"></div>
+                <span class="project-tag-pill">Agency & Services</span>
+              </div>
+              <div class="project-info-wrap">
+                <div class="project-tech-badges">
+                  <span class="tech-chip">HTML5</span>
+                  <span class="tech-chip">Vanilla CSS</span>
+                  <span class="tech-chip">JavaScript</span>
+                  <span class="tech-chip">SEO</span>
+                </div>
+                <h3 class="project-card-title">Raditya DevStudio — Digital Agency Platform</h3>
+                <p class="project-card-desc">
+                  Landing page representatif layanan pembuatan website profesional, cepat, dan berkonversi tinggi untuk personal branding, UMKM, dan startup.
+                </p>
+                <div class="project-links-row">
+                  <a href="https://github.com/AFDAlKURNIAWAN" target="_blank" rel="noopener noreferrer" class="link-btn-ghost" onclick="event.stopPropagation()">
+                    <span>GitHub Repo</span>
+                  </a>
+                  <button type="button" class="btn-detail-trigger" data-detail-id="raditya-devstudio">
+                    Detail ↗
+                  </button>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TECH STACK & MARQUEE SECTION ================= -->
+      <section class="tech-section" id="tech">
+        <div class="section-container">
+          <div class="tech-header-center">
+            <span class="section-tag-purple">ARSENAL</span>
+            <h2 class="section-title-white">TECH STACK & TOOLS</h2>
+            <p class="tech-sub-desc">Teknologi modern yang digunakan untuk merancang dan membangun ekosistem web.</p>
+          </div>
+        </div>
+
+        <!-- Infinite Continuous Marquee (moncy.dev style) -->
+        <div class="marquee-wrapper" aria-hidden="true">
+          <div class="marquee-track" id="marqueeTrack">
+            <div class="marquee-pill">
+              <img src="/assets/react-icon-BCUDq2XV.webp" alt="React" width="22" height="22" />
+              <span>React.js</span>
+            </div>
+            <div class="marquee-pill">
+              <img src="/assets/javascript-icon-DhOOfB6q.webp" alt="JavaScript" width="22" height="22" />
+              <span>JavaScript (ES6+)</span>
+            </div>
+            <div class="marquee-pill">
+              <img src="/assets/tailwind-icon-lAHwRgSR.webp" alt="Tailwind CSS" width="22" height="22" />
+              <span>Tailwind CSS</span>
+            </div>
+            <div class="marquee-pill">
+              <img src="/assets/html-icon-DLKTC_Zx.webp" alt="HTML5" width="22" height="22" />
+              <span>HTML5 Semantic</span>
+            </div>
+            <div class="marquee-pill">
+              <img src="/assets/css-icon-Dd1zwiLc.webp" alt="CSS3" width="22" height="22" />
+              <span>Modern CSS3</span>
+            </div>
+            <div class="marquee-pill">
+              <img src="/assets/git-icon-BJSQaGUQ.webp" alt="Git" width="22" height="22" />
+              <span>Git & GitHub</span>
+            </div>
+            <div class="marquee-pill">
+              <img src="/assets/bootstrap-icon-DsBe536n.webp" alt="Bootstrap" width="22" height="22" />
+              <span>Bootstrap 5</span>
+            </div>
+            <div class="marquee-pill">
+              <span class="pill-sparkle">✦</span>
+              <span>Vite Engine</span>
+            </div>
+            <div class="marquee-pill">
+              <span class="pill-sparkle">⚡</span>
+              <span>Responsive UI/UX</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificates Showcase -->
+        <div class="section-container certs-container">
+          <h3 class="certs-section-heading">Sertifikasi & Kompetensi</h3>
+          <div class="certs-grid">
+            <div class="cert-card" data-cert-id="lks-2024">
+              <div class="cert-icon-box">🏆</div>
+              <div class="cert-content">
+                <span class="cert-year">2024 · Tingkat Provinsi</span>
+                <h4 class="cert-title">Peserta LKS SMK 2024 — Web Technology</h4>
+                <p class="cert-issuer">Dinas Pendidikan Provinsi Sumatera Utara</p>
+                <p class="cert-desc">Merancang solusi website responsif dengan katalog dan manajemen produk terstruktur dalam ajang kompetisi kejuruan bergengsi.</p>
+              </div>
+            </div>
+            <div class="cert-card" data-cert-id="aws-cloud-ai">
+              <div class="cert-icon-box">☁️</div>
+              <div class="cert-content">
+                <span class="cert-year">2024 · Cloud & AI</span>
+                <h4 class="cert-title">Belajar Dasar Cloud dan Gen AI di AWS</h4>
+                <p class="cert-issuer">Dicoding Indonesia × AWS</p>
+                <p class="cert-desc">Sertifikasi fundamental arsitektur AWS cloud compute, storage, security, dan pemanfaatan model Generative AI modern.</p>
+              </div>
+            </div>
+            <div class="cert-card" data-cert-id="dicoding-ai">
+              <div class="cert-icon-box">🧠</div>
+              <div class="cert-content">
+                <span class="cert-year">2024 · Artificial Intelligence</span>
+                <h4 class="cert-title">Belajar Dasar Artificial Intelligence (AI)</h4>
+                <p class="cert-issuer">Dicoding Indonesia</p>
+                <p class="cert-desc">Pemahaman Machine Learning, data preprocessing, neural networks, dan implementasi model kecerdasan buatan.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CONTACT SECTION (moncy.dev Impactful CTA) ================= -->
+      <section class="contact-section" id="contact">
+        <div class="section-container">
+          <div class="contact-card-box">
+            <span class="section-tag-purple">GET IN TOUCH</span>
+            
+            <h2 class="contact-hero-heading">
+              LET'S BUILD SOMETHING<br/>
+              <span class="text-gradient-purple">REMARKABLE TOGETHER.</span>
+            </h2>
+            
+            <p class="contact-sub-text">
+              Punya ide proyek, tawaran kolaborasi, atau ingin konsultasi kebutuhan website? Pintu selalu terbuka untuk berdiskusi.
+            </p>
+
+            <!-- Big Interactive Email Pill -->
+            <div class="contact-email-row">
+              <button type="button" class="big-email-button" id="copyEmailBigBtn">
+                <span class="big-email-icon">✉</span>
+                <span class="big-email-addr">raditya.hardana@gmail.com</span>
+                <span class="big-copy-tag" id="bigCopyTag">Klik untuk Salin</span>
+              </button>
+            </div>
+
+            <!-- Contact Form -->
+            <form class="clean-contact-form" id="contactForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="formName" class="form-label">Nama Lengkap</label>
+                  <input type="text" id="formName" name="name" class="form-input" placeholder="Nama Anda" required />
+                </div>
+                <div class="form-group">
+                  <label for="formEmail" class="form-label">Alamat Email</label>
+                  <input type="email" id="formEmail" name="email" class="form-input" placeholder="email@domain.com" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="formMessage" class="form-label">Pesan / Detail Proyek</label>
+                <textarea id="formMessage" name="message" rows="4" class="form-textarea" placeholder="Ceritakan ide, kebutuhan, atau pertanyaan Anda..." required></textarea>
+              </div>
+              <button type="submit" class="btn-submit-message">
+                <span>Kirim Pesan Sekarang</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              </button>
+            </form>
+
+            <!-- Bottom Location & Time Meta -->
+            <div class="contact-meta-footer">
+              <div class="meta-item">
+                <span class="meta-bullet"></span>
+                <span>Lokasi: <strong>Medan, Indonesia</strong></span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-bullet"></span>
+                <span>Waktu Lokal: <strong id="liveWibClock">--:--:-- WIB</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FOOTER ================= -->
+      <footer class="site-footer">
+        <div class="section-container footer-inner">
+          <div class="footer-left">
+            <span class="footer-logo">raditya.dev</span>
+            <p class="footer-copy">© 2026 Raditya Bagus Hardana. Inspired by moncy.dev & anjalisaputra.site.</p>
+          </div>
+          <div class="footer-right">
+            <a href="https://github.com/AFDAlKURNIAWAN" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+            <a href="mailto:raditya.hardana@gmail.com" class="footer-link">Email</a>
+            <a href="#hero" class="footer-link back-top-link">↑ Ke Atas</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Global Modal Overlay (for Project and Certificate Details) -->
+    <div class="modal-backdrop" id="globalModal" aria-hidden="true" role="dialog">
+      <div class="modal-card">
+        <button type="button" class="modal-close-button" id="modalCloseBtn" aria-label="Tutup Modal">✕</button>
+        <div class="modal-body" id="modalDynamicBody"></div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-notification" id="toastNotice" role="alert"></div>
+
+    <!-- Main JavaScript Logic -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

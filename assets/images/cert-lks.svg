@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="certBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="50%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Frame -->
+  <rect width="800" height="500" rx="16" fill="url(#certBg)" stroke="#334155" stroke-width="2"/>
+  
+  <!-- Inner Decorative Border -->
+  <rect x="25" y="25" width="750" height="450" rx="12" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.6"/>
+  <rect x="35" y="35" width="730" height="430" rx="8" fill="#0f172a" fill-opacity="0.7"/>
+  
+  <!-- Header Badge -->
+  <circle cx="400" cy="100" r="32" fill="url(#goldGrad)"/>
+  <polygon points="400,82 408,98 425,98 412,108 417,124 400,114 383,124 388,108 375,98 392,98" fill="#0f172a"/>
+  
+  <!-- Certificate Title -->
+  <text x="400" y="170" font-family="'Inter', system-ui, sans-serif" font-size="28" font-weight="800" fill="#f8fafc" text-anchor="middle" letter-spacing="3">SERTIFIKAT PENGHARGAAN</text>
+  <text x="400" y="200" font-family="'Inter', system-ui, sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle" letter-spacing="1.5">LOMBA KOMPETENSI SISWA (LKS) SMK TINGKAT PROVINSI</text>
+  
+  <text x="400" y="245" font-family="'Inter', system-ui, sans-serif" font-size="14" fill="#cbd5e1" text-anchor="middle">Diberikan secara terhormat kepada:</text>
+  
+  <!-- Name -->
+  <text x="400" y="290" font-family="'Inter', system-ui, sans-serif" font-size="32" font-weight="700" fill="#38bdf8" text-anchor="middle" letter-spacing="1">RADITYA BAGUS HARDANA</text>
+  <line x1="220" y1="305" x2="580" y2="305" stroke="url(#goldGrad)" stroke-width="2"/>
+  
+  <!-- Description -->
+  <text x="400" y="340" font-family="'Inter', system-ui, sans-serif" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="500">Bidang Lomba: Web Technology</text>
+  <text x="400" y="365" font-family="'Inter', system-ui, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Atas dedikasi, keahlian teknis, dan rancangan aplikasi web interaktif responsif modern.</text>
+  
+  <!-- Footer Seal & Signature info -->
+  <text x="120" y="425" font-family="'Inter', system-ui, sans-serif" font-size="12" fill="#64748b" text-anchor="start">Tahun Kompetisi: 2024</text>
+  <text x="120" y="445" font-family="'Inter', system-ui, sans-serif" font-size="12" fill="#64748b" text-anchor="start">Status: Terverifikasi Resmi</text>
+  
+  <text x="680" y="425" font-family="'Inter', system-ui, sans-serif" font-size="12" fill="#64748b" text-anchor="end">Kategori: Front-End &amp; CMS</text>
+  <text x="680" y="445" font-family="'Inter', system-ui, sans-serif" font-size="12" fill="#38bdf8" text-anchor="end">ID: LKS-WT-2024-RBH</text>
+</svg>
