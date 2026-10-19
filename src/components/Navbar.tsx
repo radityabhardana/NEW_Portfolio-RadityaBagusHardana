@@ -21,7 +21,7 @@ const Navbar = () => {
     });
 
     smoother.scrollTop(0);
-    smoother.paused(true);
+    smoother.paused(false);
     ScrollTrigger.refresh();
 
     let links = document.querySelectorAll(".header ul a");

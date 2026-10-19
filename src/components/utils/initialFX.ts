@@ -4,12 +4,14 @@ import { smoother } from "../Navbar";
 
 export function initialFX() {
   document.body.style.overflowY = "auto";
-  smoother.paused(false);
-  document.getElementsByTagName("main")[0].classList.add("main-active");
+  if (smoother) {
+    smoother.paused(false);
+  }
+  document.getElementsByTagName("main")[0]?.classList.add("main-active");
   gsap.to("body", {
     backgroundColor: "#0b080c",
-    duration: 0.5,
-    delay: 1,
+    duration: 0.3,
+    delay: 0.1,
   });
 
   var landingText = new SplitText(
