@@ -90,8 +90,8 @@ const WhatIDo = () => {
               <h3>DEVELOP</h3>
               <h4>Description</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae.
+                Building responsive, performant, and interactive web experiences
+                leveraging modern frontend frameworks, 3D graphics, and fluid animations.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
@@ -131,8 +131,8 @@ const WhatIDo = () => {
               <h3>DESIGN</h3>
               <h4>Description</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae
+                Crafting modern, intuitive user interfaces, digital identities, and
+                interactive 3D visuals that deliver memorable digital experiences.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
