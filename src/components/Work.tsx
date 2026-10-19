@@ -1,58 +1,58 @@
+import { useRef } from "react";
 import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const Work = () => {
-  useGSAP(() => {
-  let translateX: number = 0;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const flexRef = useRef<HTMLDivElement>(null);
 
-  function setTranslateX() {
-    const box = document.getElementsByClassName("work-box");
-    const rectLeft = document
-      .querySelector(".work-container")!
-      .getBoundingClientRect().left;
-    const rect = box[0].getBoundingClientRect();
-    const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-    let padding: number =
-      parseInt(window.getComputedStyle(box[0]).padding) / 2;
-    translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
-  }
+  useGSAP(
+    () => {
+      const workFlex = flexRef.current;
+      const container = containerRef.current;
+      if (!workFlex || !container) return;
 
-  setTranslateX();
+      const getScrollAmount = () => {
+        const boxes = container.querySelectorAll<HTMLElement>(".work-box");
+        if (boxes.length === 0) return 0;
+        const lastBox = boxes[boxes.length - 1];
+        const containerPadding = 120;
+        const totalCardsWidth = lastBox.offsetLeft + lastBox.offsetWidth;
+        return Math.max(0, totalCardsWidth - window.innerWidth + containerPadding);
+      };
 
-  let timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".work-section",
-      start: "top top",
-      end: `+=${translateX}`, // Use actual scroll width
-      scrub: true,
-      pin: true,
-      id: "work",
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top top",
+          end: () => `+=${getScrollAmount()}`,
+          scrub: 1,
+          pin: true,
+          pinSpacing: true,
+          invalidateOnRefresh: true,
+          id: "work",
+        },
+      });
+
+      timeline.to(workFlex, {
+        x: () => -getScrollAmount(),
+        ease: "none",
+      });
     },
-  });
-
-  timeline.to(".work-flex", {
-    x: -translateX,
-    ease: "none",
-  });
-
-  // Clean up (optional, good practice)
-  return () => {
-    timeline.kill();
-    ScrollTrigger.getById("work")?.kill();
-  };
-}, []);
+    { scope: containerRef }
+  );
   return (
-    <div className="work-section" id="work">
+    <div className="work-section" id="work" ref={containerRef}>
       <div className="work-container section-container">
         <h2>
           My <span>Work</span>
         </h2>
-        <div className="work-flex">
+        <div className="work-flex" ref={flexRef}>
           {[...Array(6)].map((_value, index) => (
             <div className="work-box" key={index}>
               <div className="work-info">
