@@ -38,7 +38,7 @@ export function setCharTimeline(
   });
   let screenLight: any, monitor: any;
   character?.children.forEach((object: any) => {
-    if (object.name === "Plane.004") {
+    if (object.name === "Plane004") {
       object.children.forEach((child: any) => {
         child.material.transparent = true;
         child.material.opacity = 0;
@@ -60,7 +60,7 @@ export function setCharTimeline(
       screenLight = object;
     }
   });
-  let neckBone = character?.getObjectByName("spine.005");
+  let neckBone = character?.getObjectByName("spine005");
   if (window.innerWidth > 1024) {
     if (character) {
       tl1

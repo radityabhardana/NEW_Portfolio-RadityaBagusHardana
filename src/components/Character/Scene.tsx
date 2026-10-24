@@ -60,7 +60,7 @@ const Scene = () => {
           let character = gltf.scene;
           characterObj = character;
           scene.add(character);
-          headBone = character.getObjectByName("spine.006") || null;
+          headBone = character.getObjectByName("spine006") || null;
           screenLight = character.getObjectByName("screenlight") || null;
           light.turnOnLights();
           animations.startIntro();

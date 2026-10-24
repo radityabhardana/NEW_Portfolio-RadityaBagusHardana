@@ -22,7 +22,7 @@ const setCharacter = (
       try {
         let character: THREE.Object3D;
         loader.load(
-          "/models/character.glb",
+          "/models/karakter.glb",
           async (gltf) => {
             character = gltf.scene;
 
