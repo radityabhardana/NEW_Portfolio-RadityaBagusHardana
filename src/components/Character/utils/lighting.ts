@@ -18,32 +18,50 @@ const setLighting = (scene: THREE.Scene) => {
   pointLight.castShadow = true;
   scene.add(pointLight);
 
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+  scene.add(ambientLight);
+
+  const frontLight = new THREE.DirectionalLight(0xffffff, 1.8);
+  frontLight.position.set(2, 14, 20);
+  frontLight.castShadow = true;
+  scene.add(frontLight);
+
   new RGBELoader()
     .setPath("/models/")
     .load("char_enviorment.hdr", function (texture) {
       texture.mapping = THREE.EquirectangularReflectionMapping;
       scene.environment = texture;
-      scene.environmentIntensity = 0;
+      scene.environmentIntensity = 0.8;
       scene.environmentRotation.set(5.76, 85.85, 1);
     });
 
   function setPointLight(screenLight: any) {
-    if (screenLight.material.opacity > 0.9) {
+    if (screenLight?.material && screenLight.material.opacity > 0.9) {
       pointLight.intensity = screenLight.material.emissiveIntensity * 20;
     } else {
-      pointLight.intensity = 0;
+      pointLight.intensity = 1.5;
     }
   }
   const duration = 2;
   const ease = "power2.inOut";
   function turnOnLights() {
     gsap.to(scene, {
-      environmentIntensity: 0.64,
+      environmentIntensity: 0.8,
       duration: duration,
       ease: ease,
     });
     gsap.to(directionalLight, {
-      intensity: 1,
+      intensity: 1.5,
+      duration: duration,
+      ease: ease,
+    });
+    gsap.to(frontLight, {
+      intensity: 2.2,
+      duration: duration,
+      ease: ease,
+    });
+    gsap.to(ambientLight, {
+      intensity: 1.2,
       duration: duration,
       ease: ease,
     });

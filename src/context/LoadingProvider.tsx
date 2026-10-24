@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import Loading from "../components/Loading";
+import { initialFX } from "../components/utils/initialFX";
 
 interface LoadingType {
   isLoading: boolean;
@@ -17,12 +17,18 @@ export const LoadingContext = createContext<LoadingType | null>(null);
 
 export const LoadingProvider = ({ children }: PropsWithChildren) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [loading, setLoading] = useState(100);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      initialFX();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const value = {
     isLoading,
     setIsLoading,
-    setLoading,
+    setLoading: () => {},
   };
 
   return (

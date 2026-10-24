@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import setCharacter from "./utils/character";
 import setLighting from "./utils/lighting";
-import { useLoading } from "../../context/LoadingProvider";
 import handleResize from "./utils/resizeUtils";
 import {
   handleMouseMove,
@@ -11,13 +10,11 @@ import {
   handleTouchMove,
 } from "./utils/mouseUtils";
 import setAnimations from "./utils/animationUtils";
-import { setProgress } from "../Loading";
 
 const Scene = () => {
   const canvasDiv = useRef<HTMLDivElement | null>(null);
   const hoverDivRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef(new THREE.Scene());
-  const { setLoading } = useLoading();
 
   const [character, setChar] = useState<THREE.Object3D | null>(null);
   useEffect(() => {
@@ -50,15 +47,16 @@ const Scene = () => {
       const clock = new THREE.Clock();
 
       const light = setLighting(scene);
-      let progress = setProgress((value) => setLoading(value));
       const { loadCharacter } = setCharacter(renderer, scene, camera);
 
+      let characterObj: THREE.Object3D | null = null;
       loadCharacter().then((gltf) => {
         if (gltf) {
           const animations = setAnimations(gltf);
           hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
           mixer = animations.mixer;
           let character = gltf.scene;
+          characterObj = character;
           setChar(character);
           scene.add(character);
           headBone = character.getObjectByName("spine006") || null;
@@ -114,6 +112,19 @@ const Scene = () => {
             THREE.MathUtils.lerp
           );
           light.setPointLight(screenLight);
+        } else if (characterObj && window.scrollY < 200) {
+          const targetRotY = -Math.PI / 2 + mouse.x * 0.35;
+          const targetRotX = -mouse.y * 0.15;
+          characterObj.rotation.y = THREE.MathUtils.lerp(
+            characterObj.rotation.y,
+            targetRotY,
+            0.05
+          );
+          characterObj.rotation.x = THREE.MathUtils.lerp(
+            characterObj.rotation.x,
+            targetRotX,
+            0.05
+          );
         }
         const delta = clock.getDelta();
         if (mixer) {
