@@ -1,6 +1,11 @@
+/* Shared section shell + splitText animation targets.
+   Section-specific composition lives in each component's own stylesheet. */
+
 .section-container {
   width: 1300px;
+  margin: auto;
 }
+
 .title,
 .para {
   font-kerning: none;
@@ -9,6 +14,7 @@
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
+
 @media only screen and (max-width: 1600px) {
   .section-container {
     width: 1200px;

@@ -5,65 +5,76 @@ const Contact = () => {
   return (
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
-        <h3>Contact</h3>
-        <div className="contact-flex">
-          <div className="contact-box">
-            <h4>Email</h4>
-            <p>
-              <a href="mailto:raditya.hardana@gmail.com" data-cursor="disable">
-                raditya.hardana@gmail.com
+        <div className="contact-eyebrow">
+          <span className="u-label">07 — Contact</span>
+          <span className="contact-rule" />
+        </div>
+
+        <h3>
+          Let&rsquo;s build <em>something</em>.
+        </h3>
+
+        <a
+          className="contact-email"
+          href="mailto:raditya.hardana@gmail.com"
+          data-cursor="disable"
+        >
+          <span>raditya.hardana@gmail.com</span>
+          <MdArrowOutward />
+        </a>
+
+        <div className="contact-meta">
+          <div className="contact-col">
+            <span className="u-label">Direct</span>
+            <a href="tel:+628123456789" data-cursor="disable">
+              +62 812 3456 7890
+            </a>
+          </div>
+
+          <div className="contact-col">
+            <span className="u-label">Elsewhere</span>
+            <div className="contact-socials">
+              <a
+                href="https://github.com/AFDAlKURNIAWAN"
+                target="_blank"
+                data-cursor="disable"
+                className="contact-social"
+              >
+                Github <MdArrowOutward />
               </a>
-            </p>
-            <h4>Phone</h4>
-            <p>
-              <a href="tel:+628123456789" data-cursor="disable">
-                +62 812 3456 7890
+              <a
+                href="https://www.linkedin.com"
+                target="_blank"
+                data-cursor="disable"
+                className="contact-social"
+              >
+                Linkedin <MdArrowOutward />
               </a>
-            </p>
+              <a
+                href="https://x.com"
+                target="_blank"
+                data-cursor="disable"
+                className="contact-social"
+              >
+                Twitter <MdArrowOutward />
+              </a>
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                data-cursor="disable"
+                className="contact-social"
+              >
+                Instagram <MdArrowOutward />
+              </a>
+            </div>
           </div>
-          <div className="contact-box">
-            <h4>Social</h4>
-            <a
-              href="https://github.com/AFDAlKURNIAWAN"
-              target="_blank"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Github <MdArrowOutward />
-            </a>
-            <a
-              href="https://www.linkedin.com"
-              target="_blank"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Linkedin <MdArrowOutward />
-            </a>
-            <a
-              href="https://x.com"
-              target="_blank"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Twitter <MdArrowOutward />
-            </a>
-            <a
-              href="https://www.instagram.com"
-              target="_blank"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Instagram <MdArrowOutward />
-            </a>
-          </div>
-          <div className="contact-box">
-            <h2>
-              Designed and Developed <br /> by <span>Raditya Bagus Hardana</span>
-            </h2>
-            <h5>
-              <MdCopyright /> 2026
-            </h5>
-          </div>
+        </div>
+
+        <div className="contact-foot">
+          <h5>
+            <MdCopyright /> 2026 Raditya Bagus Hardana
+          </h5>
+          <span>Designed &amp; developed in Jakarta</span>
         </div>
       </div>
     </div>

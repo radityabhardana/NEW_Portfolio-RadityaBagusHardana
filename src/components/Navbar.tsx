@@ -44,36 +44,40 @@ const Navbar = () => {
     <>
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
-          raditya.dev
+          <span className="navbar-mark">RBH</span>
+          <span className="navbar-title-text">
+            <span className="navbar-name">Raditya Bagus Hardana</span>
+            <span className="navbar-role">Design Engineer</span>
+          </span>
         </a>
-        <a
-          href="mailto:raditya.hardana@gmail.com"
-          className="navbar-connect"
-          data-cursor="disable"
-        >
-          raditya.hardana@gmail.com
-        </a>
+
+        <div className="navbar-status">
+          <span className="navbar-status-dot" />
+          Jakarta · GMT+7
+        </div>
+
         <ul>
           <li>
             <a data-href="#about" href="#about">
-              <HoverLinks text="ABOUT" />
+              <span className="navbar-idx">01</span>
+              <HoverLinks text="About" />
             </a>
           </li>
           <li>
             <a data-href="#work" href="#work">
-              <HoverLinks text="WORK" />
+              <span className="navbar-idx">02</span>
+              <HoverLinks text="Work" />
             </a>
           </li>
           <li>
             <a data-href="#contact" href="#contact">
-              <HoverLinks text="CONTACT" />
+              <span className="navbar-idx">03</span>
+              <HoverLinks text="Contact" />
             </a>
           </li>
         </ul>
       </div>
 
-      <div className="landing-circle1"></div>
-      <div className="landing-circle2"></div>
       <div className="nav-fade"></div>
     </>
   );

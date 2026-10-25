@@ -1,20 +1,27 @@
-.hover-link {
+/* Shared link treatment: a hairline underline that sweeps in from the left
+   on hover. Replaces the old stacked-text slide. */
+
+.link {
   position: relative;
-  display: flex;
-  text-wrap: nowrap;
-  overflow: hidden;
+  display: inline-block;
+  color: inherit;
+  transition: color var(--dur-2) var(--ease-out);
 }
-.hover-in {
-  position: relative;
-  transition: 0.3s;
-}
-.hover-in div {
-  display: flex;
+.link::after {
+  content: "";
   position: absolute;
-  top: 100%;
   left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-2) var(--ease-out);
 }
-.hover-link:hover .hover-in {
-  transform: translateY(-100%);
-  color: var(--accentColor);
+.link:hover {
+  color: var(--iris-2);
+}
+.link:hover::after {
+  transform: scaleX(1);
 }

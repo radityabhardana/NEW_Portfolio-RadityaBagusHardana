@@ -7,6 +7,29 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
+interface WorkItem {
+  title: string;
+  category: string;
+  tools: string;
+  image: string;
+  alt?: string;
+  video?: string;
+  link?: string;
+}
+
+// Placeholder content — real project data gets dropped in here later.
+const placeholderItem: WorkItem = {
+  title: "Project Name",
+  category: "Category",
+  tools: "Javascript, TypeScript, React, Threejs",
+  image: "/images/placeholder.webp",
+  alt: "",
+};
+
+const workItems: WorkItem[] = Array.from({ length: 6 }, () => ({
+  ...placeholderItem,
+}));
+
 const Work = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const flexRef = useRef<HTMLDivElement>(null);
@@ -46,28 +69,39 @@ const Work = () => {
     },
     { scope: containerRef }
   );
+
   return (
     <div className="work-section" id="work" ref={containerRef}>
       <div className="work-container section-container">
-        <h2>
-          My <span>Work</span>
-        </h2>
-        <div className="work-flex" ref={flexRef}>
-          {[...Array(6)].map((_value, index) => (
-            <div className="work-box" key={index}>
-              <div className="work-info">
-                <div className="work-title">
-                  <h3>0{index + 1}</h3>
+        <div className="work-header">
+          <div className="work-eyebrow">
+            <span className="u-label">05 — Work</span>
+            <span className="work-rule" />
+          </div>
+          <h2>
+            Selected <span>Work</span>
+          </h2>
+        </div>
 
-                  <div>
-                    <h4>Project Name</h4>
-                    <p>Category</p>
-                  </div>
+        <div className="work-flex" ref={flexRef}>
+          {workItems.map((item, index) => (
+            <div className="work-box" key={index}>
+              <WorkImage
+                image={item.image}
+                alt={item.alt}
+                video={item.video}
+                link={item.link}
+              />
+              <div className="work-info">
+                <div className="work-head">
+                  <span className="work-index u-label">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="work-category u-label">{item.category}</span>
                 </div>
-                <h4>Tools and features</h4>
-                <p>Javascript, TypeScript, React, Threejs</p>
+                <h4 className="work-name">{item.title}</h4>
+                <p className="work-tools">{item.tools}</p>
               </div>
-              <WorkImage image="/images/placeholder.webp" alt="" />
             </div>
           ))}
         </div>

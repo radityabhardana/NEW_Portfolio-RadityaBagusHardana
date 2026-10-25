@@ -1,90 +1,146 @@
+/* CONTACT — a colophon: statement, one dominant email line, meta, footer. */
+
 .contact-section {
   margin: auto;
+  padding-top: 120px;
   padding-bottom: 100px;
   margin-top: 100px;
 }
-.contact-section h3 {
-  font-size: 60px;
-  font-weight: 400;
-  text-transform: uppercase;
-  margin: 0;
-}
-.contact-flex {
+
+.contact-eyebrow {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-4);
+  margin-bottom: var(--s-7);
 }
-.contact-flex h4 {
-  font-weight: 500;
-  margin: 0;
-  opacity: 0.6;
+.contact-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
 }
-.contact-box {
+
+.contact-section h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 6vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  margin: 0 0 var(--s-7);
+}
+.contact-section h3 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--iris-2);
+}
+
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-4);
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.2rem, 2.6vw, 2.6rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--line-2);
+  transition: color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out);
+}
+.contact-email svg {
+  font-size: 0.7em;
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.contact-email:hover {
+  color: var(--iris-2);
+  border-color: var(--iris);
+}
+.contact-email:hover svg {
+  transform: translate(4px, -4px);
+}
+
+.contact-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-8);
+  margin-top: var(--s-9);
+}
+.contact-col {
   display: flex;
   flex-direction: column;
+  gap: var(--s-4);
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-4);
 }
-.contact-flex p {
-  margin-top: 10px;
-  margin-bottom: 20px;
+.contact-col > a {
+  font-size: 1rem;
+  color: var(--paper-2);
+  transition: color var(--dur-2) var(--ease-out);
 }
-a.contact-social {
-  font-size: 25px;
-  border-bottom: 1px solid #ccc;
+.contact-col > a:hover {
+  color: var(--paper);
 }
-.contact-box h2 {
-  font-weight: 400;
-  font-size: 23px;
-  margin: 0;
-}
-.contact-box h2 > span {
-  color: var(--accentColor);
-}
-.contact-box h5 {
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 20px;
+
+.contact-socials {
   display: flex;
-  gap: 10px;
-  opacity: 0.5;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-6);
 }
-@media only screen and (max-width: 1600px) {
-  .contact-section h3 {
-    font-size: 50px;
-  }
-  .contact-box h2 {
-    font-size: 20px;
-  }
-  a.contact-social {
-    font-size: 22px;
-  }
+.contact-social {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: 1rem;
+  color: var(--paper-2);
+  transition: color var(--dur-2) var(--ease-out);
 }
-@media only screen and (max-width: 1300px) {
-  .contact-section h3 {
-    font-size: 40px;
-  }
-  .contact-box h2 {
-    font-size: 18px;
-  }
-  a.contact-social {
-    font-size: 20px;
-  }
-  .contact-flex p {
-    margin-top: 0px;
-  }
+.contact-social svg {
+  font-size: 0.85em;
+  transition: transform var(--dur-2) var(--ease-out);
 }
+.contact-social:hover {
+  color: var(--iris-2);
+}
+.contact-social:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.contact-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-top: var(--s-9);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.contact-foot h5 {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin: 0;
+  font-weight: 500;
+  font-size: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
 @media only screen and (max-width: 900px) {
-  .contact-flex {
-    flex-direction: column;
-    gap: 40px;
-  }
-  .contact-flex p {
-    margin-bottom: 0px;
-  }
-  .contact-flex h4 {
-    margin-top: 20px;
-  }
   .contact-section {
     margin-top: 50px;
+    padding-top: 70px;
     padding-bottom: 50px;
+  }
+  .contact-meta {
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
   }
   .contact-container {
     width: calc(100% - 25px);
