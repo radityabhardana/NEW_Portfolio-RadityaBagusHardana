@@ -1,34 +1,46 @@
-# Personal Portfolio License (PPL) v1.0
+MIT License (Source Code) & All Rights Reserved (Personal Assets)
+=================================================================
 
-Copyright (c) 2026 Moncy Yohannan
+Part 1 — Source Code License (MIT License)
+------------------------------------------
+Applies to source code files in `src/` and root configuration files, EXCLUDING
+all personal media, 3D character scans/models, resumes, certificates, project
+screenshots, and personal identity content in `public/`.
 
-This project is made available publicly for learning and reference purposes only.
+Copyright (c) 2026 Raditya Bagus Hardana
+Portions of initial 3D scroll structure inspired by Moncy Yohannan (https://www.moncy.dev).
 
-## Permissions
-You may:
-- View and study the code
-- Use small portions for personal learning
-- Build your own projects inspired by this work
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated code files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-## Restrictions
-You may NOT:
-- Copy, replicate, or clone the entire website, design, or experience
-- Use this project or its derivatives for commercial purposes
-- Re-upload, redistribute, or resell this project
-- Create tutorials, videos, or courses based on this exact project without permission
-- Use any original assets (including 3D models, avatar, or visuals)
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## Attribution
-If you use any part of this project, you must give clear credit to:
-“Moncy Yohannan” with a link to the original source.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-## Assets & 3D Content
-All 3D assets, including the avatar, models, textures, and visual elements are proprietary and NOT part of this license.
 
-They may not be copied, used, or redistributed under any circumstances without explicit permission.
+Part 2 — Personal Assets & Identity Notice (All Rights Reserved)
+----------------------------------------------------------------
+Copyright (c) 2026 Raditya Bagus Hardana. All Rights Reserved.
 
-## Enforcement
-Unauthorized use may result in DMCA takedown requests or legal action.
+The MIT License above DOES NOT apply to personal assets and identity materials
+contained in this repository, including but not limited to:
+- 3D character models and likeness (`public/models/karakter-opt.glb`)
+- Curriculum Vitae / Resume documents (`public/Raditya-Bagus-Hardana-CV.pdf`)
+- Certificates and award credentials (`public/certificate/*`)
+- Project preview images (`public/project/*`)
+- Personal name, biographical details, and contact information
 
-## Contact
-connect@moncy.dev / www.moncy.dev
+You may NOT copy, extract, redistribute, modify, or reuse any of the personal
+assets listed above in any personal or commercial work without prior written
+permission from Raditya Bagus Hardana (raditya.bhardana@gmail.com).
