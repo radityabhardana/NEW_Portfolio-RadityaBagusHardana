@@ -31,7 +31,9 @@ const Navbar = () => {
       const elem = e.currentTarget as HTMLAnchorElement;
       const section = elem.getAttribute("data-href");
       if (!section) return;
-      const offset = section === "#work" ? "top top" : "top 72px";
+      const isPinnedWork =
+        section === "#work" && !document.querySelector(".work-section.is-empty");
+      const offset = isPinnedWork ? "top top" : "top 72px";
       smoother.scrollTo(section, true, offset);
     };
     links.forEach((element) => {
