@@ -22,7 +22,7 @@ const TechStack = () => {
     <div className="techstack">
       <div className="techstack-head">
         <div className="techstack-eyebrow">
-          <span className="u-label">06 — Toolkit</span>
+          <span className="u-label">07 — Toolkit</span>
           <span className="techstack-rule" />
         </div>
         <h2>

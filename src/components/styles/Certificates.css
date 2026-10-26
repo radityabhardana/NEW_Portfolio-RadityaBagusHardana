@@ -1,0 +1,247 @@
+/* CERTIFICATES — an award/credential ledger: a hairline grid of plates with
+   a dependency-free, keyboard-operable lightbox preview. */
+
+.certificates-section {
+  padding: var(--s-9) 0;
+  margin: auto;
+}
+
+.cert-head {
+  margin-bottom: var(--s-8);
+}
+.cert-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin-bottom: var(--s-5);
+}
+.cert-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.cert-head h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 4.4vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--paper);
+}
+
+/* ---- grid ---- */
+.cert-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-7) var(--s-6);
+}
+.cert-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  min-width: 0;
+}
+
+/* ---- image plate ---- */
+.cert-plate {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background-color: var(--ink-2);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+}
+.cert-plate img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.cert-plate:hover {
+  border-color: var(--iris);
+  background-color: var(--ink-3);
+  transform: translateY(-3px);
+}
+.cert-plate:focus-visible {
+  outline: 2px solid var(--iris);
+  outline-offset: 3px;
+}
+
+.is-pinned .cert-plate {
+  border-color: var(--line-2);
+}
+
+.cert-pin {
+  position: absolute;
+  top: var(--s-3);
+  right: var(--s-3);
+  z-index: 2;
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background-color: var(--iris-2);
+}
+
+/* ---- meta ---- */
+.cert-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  min-width: 0;
+}
+.cert-meta-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding-bottom: var(--s-2);
+  border-bottom: 1px solid var(--line);
+}
+.cert-meta-row .cert-index {
+  color: var(--iris-2);
+}
+.cert-category {
+  text-align: right;
+}
+.cert-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1.3vw, 1.3rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: var(--s-1) 0 0;
+  color: var(--paper);
+  overflow-wrap: break-word;
+}
+.cert-sub {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--paper-2);
+}
+.cert-sep {
+  color: var(--muted);
+}
+
+/* ---- lightbox ---- */
+.cert-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-6);
+  background-color: color-mix(in srgb, var(--ink) 90%, transparent);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  animation: cert-fade var(--dur-2) var(--ease-out);
+}
+@keyframes cert-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.cert-lightbox-figure {
+  margin: 0;
+  max-width: min(1100px, 92vw);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+.cert-lightbox-figure img {
+  max-width: 100%;
+  max-height: 76vh;
+  object-fit: contain;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-2);
+  background-color: var(--ink-2);
+}
+.cert-lightbox-figure figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+.cert-lightbox-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--paper);
+}
+.cert-lightbox-sub {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cert-lightbox-close {
+  position: fixed;
+  top: clamp(16px, 3vw, 40px);
+  right: clamp(16px, 3vw, 40px);
+  padding: 10px 18px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper-2);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-pill);
+  background-color: transparent;
+  cursor: pointer;
+  transition: color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out);
+}
+.cert-lightbox-close:hover {
+  color: var(--paper);
+  border-color: var(--iris);
+  background-color: color-mix(in srgb, var(--iris) 12%, transparent);
+}
+.cert-lightbox-close:focus-visible {
+  outline: 2px solid var(--iris);
+  outline-offset: 3px;
+}
+
+@media screen and (max-width: 1100px) {
+  .cert-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .certificates-section {
+    padding: var(--s-8) 0;
+  }
+  .cert-head h2 {
+    font-size: 2.2rem;
+  }
+  .cert-grid {
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+  .cert-lightbox {
+    padding: var(--s-4);
+  }
+}

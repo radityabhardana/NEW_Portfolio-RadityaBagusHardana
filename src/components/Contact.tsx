@@ -6,7 +6,7 @@ const Contact = () => {
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
         <div className="contact-eyebrow">
-          <span className="u-label">07 — Contact</span>
+          <span className="u-label">08 — Contact</span>
           <span className="contact-rule" />
         </div>
 

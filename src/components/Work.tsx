@@ -75,7 +75,7 @@ const Work = () => {
       <div className="work-container section-container">
         <div className="work-header">
           <div className="work-eyebrow">
-            <span className="u-label">05 — Work</span>
+            <span className="u-label">06 — Work</span>
             <span className="work-rule" />
           </div>
           <h2>
