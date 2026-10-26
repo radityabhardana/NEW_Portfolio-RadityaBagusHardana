@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { smoother } from "./Navbar";
 import "./styles/Certificates.css";
 
-type CertificateCategory = "Projects" | "Certifications" | "Others";
+export type CertificateCategory = "Projects" | "Certifications" | "Others";
 
-interface Certificate {
+export interface Certificate {
   id: number;
   title: string;
   issuer: string;
@@ -15,7 +15,7 @@ interface Certificate {
   pinned?: boolean;
 }
 
-const certificates: Certificate[] = [
+export const certificates: Certificate[] = [
   {
     id: 1,
     title: "Clevio — Workshop GameDev",
@@ -81,18 +81,29 @@ const Certificates = () => {
 
   const active = certificates.find((cert) => cert.id === activeId) ?? null;
 
+  const restoreId = useRef<number | null>(null);
+
   const dismiss = useCallback((id: number | null) => {
+    if (id !== null) restoreId.current = id;
     setActiveId(null);
     smoother?.paused(false);
-    if (id !== null) {
-      requestAnimationFrame(() => triggers.current[id]?.focus());
-    }
   }, []);
 
   const open = (id: number) => {
     smoother?.paused(true);
     setActiveId(id);
   };
+
+  // Return focus to the triggering card the moment the lightbox unmounts.
+  // A layout effect runs synchronously right after that commit; requestAnimationFrame
+  // is not used because it never fires in hidden/headless tabs.
+  useLayoutEffect(() => {
+    if (activeId === null && restoreId.current !== null) {
+      const id = restoreId.current;
+      restoreId.current = null;
+      triggers.current[id]?.focus();
+    }
+  }, [activeId]);
 
   useEffect(() => {
     if (activeId === null) return;
@@ -112,52 +123,42 @@ const Certificates = () => {
   }, [activeId, dismiss]);
 
   return (
-    <div className="certificates-section section-container" id="certificates">
-      <div className="cert-head">
-        <div className="cert-eyebrow">
-          <span className="u-label">05 — Certificates</span>
-          <span className="cert-rule" />
-          <span className="u-label">06 records</span>
-        </div>
-        <h2>Certificates</h2>
+    <div className="records-section section-container" id="certificates">
+      <div className="records-head">
+        <span className="u-label">05 — Certificates</span>
+        <h2 className="records-title">Records</h2>
       </div>
 
-      <ul className="cert-grid">
-        {ordered.map((cert, index) => (
-          <li
-            className={`cert-card${cert.pinned ? " is-pinned" : ""}`}
-            key={cert.id}
-          >
+      <ul className="records-list">
+        {ordered.map((cert) => (
+          <li className="records-row" key={cert.id}>
             <button
               type="button"
-              className="cert-plate"
+              className="record"
               aria-label={`Preview certificate: ${cert.title}`}
               onClick={() => open(cert.id)}
               ref={(el) => {
                 triggers.current[cert.id] = el;
               }}
             >
-              <img
-                src={cert.image}
-                alt={cert.title}
-                loading="lazy"
-                decoding="async"
-              />
-              {cert.pinned && <span className="cert-pin">Pinned</span>}
-            </button>
-
-            <div className="cert-meta">
-              <div className="cert-meta-row">
-                <span className="cert-index u-label">
-                  {String(index + 1).padStart(2, "0")}
+              <span className="record-thumb">
+                <img
+                  src={cert.image}
+                  alt={cert.title}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <span className="record-body">
+                <span className="record-title">{cert.title}</span>
+                <span className="record-issuer">{cert.issuer}</span>
+                <span className="record-meta">
+                  {cert.date} · {cert.category}
                 </span>
-                <span className="cert-category u-label">{cert.category}</span>
-              </div>
-              <h3 className="cert-title">{cert.title}</h3>
-              <p className="cert-sub">
-                {cert.issuer} <span className="cert-sep">·</span> {cert.date}
-              </p>
-            </div>
+              </span>
+              <span className="record-date">{cert.date}</span>
+              <span className="record-category">{cert.category}</span>
+            </button>
           </li>
         ))}
       </ul>

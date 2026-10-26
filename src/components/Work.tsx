@@ -74,13 +74,8 @@ const Work = () => {
     <div className="work-section" id="work" ref={containerRef}>
       <div className="work-container section-container">
         <div className="work-header">
-          <div className="work-eyebrow">
-            <span className="u-label">06 — Work</span>
-            <span className="work-rule" />
-          </div>
-          <h2>
-            Selected <span>Work</span>
-          </h2>
+          <span className="u-label work-eyebrow">06 — Work</span>
+          <h2>Selected Work</h2>
         </div>
 
         <div className="work-flex" ref={flexRef}>
@@ -93,14 +88,10 @@ const Work = () => {
                 link={item.link}
               />
               <div className="work-info">
-                <div className="work-head">
-                  <span className="work-index u-label">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="work-category u-label">{item.category}</span>
-                </div>
                 <h4 className="work-name">{item.title}</h4>
-                <p className="work-tools">{item.tools}</p>
+                <p className="work-tools">
+                  {item.category} — {item.tools}
+                </p>
               </div>
             </div>
           ))}

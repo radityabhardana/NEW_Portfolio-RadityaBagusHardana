@@ -21,29 +21,13 @@ const TechStack = () => {
   return (
     <div className="techstack">
       <div className="techstack-head">
-        <div className="techstack-eyebrow">
-          <span className="u-label">07 — Toolkit</span>
-          <span className="techstack-rule" />
-        </div>
-        <h2>
-          My <span>Techstack</span>
-        </h2>
-        <p className="techstack-note">
-          A working index of the languages, libraries and runtimes behind the
-          build.
-        </p>
-      </div>
-
-      <div className="tech-colhead" aria-hidden="true">
-        <span>Index</span>
-        <span>Tool</span>
-        <span>Category</span>
+        <span className="u-label techstack-eyebrow">07 — Toolkit</span>
+        <h2>My Techstack</h2>
       </div>
 
       <ul className="tech-index">
-        {tools.map((tool, index) => (
+        {tools.map((tool) => (
           <li className="tech-item" key={tool.name}>
-            <span className="tech-num">{String(index + 1).padStart(2, "0")}</span>
             <span className="tech-tool">
               <span className="tech-mark">
                 <img src={tool.image} alt="" loading="lazy" />

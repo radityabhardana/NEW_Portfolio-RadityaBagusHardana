@@ -1,4 +1,4 @@
-/* TECHSTACK — a toolkit index. A hairline ledger of tools, not a canvas. */
+/* TECHSTACK — a toolkit ledger: a hairline-separated list of tools. */
 
 .techstack {
   width: var(--cWidth);
@@ -12,85 +12,36 @@
   margin-bottom: var(--s-8);
 }
 .techstack-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: var(--s-4);
-  margin-bottom: var(--s-5);
-}
-.techstack-rule {
-  flex: 1;
-  height: 1px;
-  background: var(--line);
+  display: block;
+  margin-bottom: var(--s-4);
 }
 
 .techstack h2 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(2.4rem, 4.4vw, 4.4rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
   margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 4.4vw, 3.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
   color: var(--paper);
-}
-.techstack h2 > span {
-  font-style: italic;
-  font-weight: 300;
-  color: var(--iris-2);
-}
-
-.techstack-note {
-  max-width: 54ch;
-  margin: var(--s-5) 0 0;
-  font-size: 0.98rem;
-  line-height: 1.6;
-  color: var(--paper-2);
 }
 
 /* ---- ledger ---- */
-.tech-colhead,
-.tech-item {
-  display: grid;
-  grid-template-columns: 64px 1fr auto;
-  align-items: center;
-  gap: var(--s-5);
-}
-
-.tech-colhead {
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding-bottom: var(--s-3);
-  border-bottom: 1px solid var(--line-2);
-}
-.tech-colhead span:last-child {
-  text-align: right;
-}
-
 .tech-index {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 .tech-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--s-5);
   padding: var(--s-4) 0;
   border-bottom: 1px solid var(--line);
-  transition: background-color var(--dur-2) var(--ease-out),
-    padding-left var(--dur-2) var(--ease-out);
 }
-.tech-item:hover {
-  background-color: color-mix(in srgb, var(--iris) 7%, transparent);
-  padding-left: var(--s-4);
-}
-
-.tech-num {
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  color: var(--muted);
+.tech-item:first-child {
+  border-top: 1px solid var(--line);
 }
 
 .tech-tool {
@@ -108,8 +59,7 @@
   border: 1px solid var(--line);
   border-radius: var(--r-2);
   background-color: var(--ink-2);
-  transition: border-color var(--dur-2) var(--ease-out),
-    transform var(--dur-2) var(--ease-out);
+  transition: border-color var(--dur-2) var(--ease-out);
 }
 .tech-mark img {
   width: 22px;
@@ -117,29 +67,21 @@
   object-fit: contain;
 }
 .tech-item:hover .tech-mark {
-  border-color: var(--iris);
-  transform: translateY(-1px);
+  border-color: var(--lime);
 }
 
 .tech-name {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(1.2rem, 1.8vw, 1.7rem);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(1.15rem, 1.7vw, 1.5rem);
   line-height: 1;
   letter-spacing: -0.01em;
   color: var(--paper);
-  transition: color var(--dur-2) var(--ease-out);
-}
-.tech-item:hover .tech-name {
-  color: var(--iris-2);
 }
 
 .tech-kind {
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
   color: var(--muted);
   text-align: right;
 }
@@ -148,12 +90,7 @@
   .techstack {
     padding: var(--s-8) 0;
   }
-  .techstack h2 {
-    font-size: 2.2rem;
-  }
-  .tech-colhead,
   .tech-item {
-    grid-template-columns: 44px 1fr auto;
     gap: var(--s-3);
   }
   .tech-mark {
@@ -161,26 +98,16 @@
     height: 38px;
   }
   .tech-name {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 }
 
 @media screen and (max-width: 560px) {
-  .tech-colhead {
-    display: none;
-  }
   .tech-item {
-    grid-template-columns: 30px 1fr;
+    grid-template-columns: 1fr;
     row-gap: var(--s-1);
   }
-  .tech-num {
-    grid-column: 1;
-  }
-  .tech-tool {
-    grid-column: 2;
-  }
   .tech-kind {
-    grid-column: 2;
     text-align: left;
   }
 }

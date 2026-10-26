@@ -4,16 +4,9 @@ const Career = () => {
   return (
     <div className="career-section section-container">
       <div className="career-container">
-        <div className="career-eyebrow">
-          <span className="u-label">04 — Career</span>
-          <span className="career-rule" />
-          <span className="u-label">Experience</span>
-        </div>
+        <span className="u-label career-eyebrow">04 — Career</span>
 
-        <h2>
-          My career <span>&</span>
-          <br /> experience
-        </h2>
+        <h2>My career &amp; experience</h2>
 
         <div className="career-info">
           <div className="career-timeline">

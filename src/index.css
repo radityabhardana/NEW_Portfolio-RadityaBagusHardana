@@ -1,6 +1,6 @@
 /* Identity: "Nocturne Ledger" — a dark editorial/technical system.
    Ink canvas, warm bone type, hairline rules, one electric iris accent. */
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300..700&display=swap");
 
 :root {
   /* ---- palette ---- */
@@ -14,9 +14,22 @@
   --paper-2: #c4bfce; /* secondary text */
   --muted: #77728a; /* tertiary / labels */
 
-  --iris: #7c5cff; /* primary accent */
-  --iris-2: #a996ff; /* bright accent (small text) */
-  --iris-deep: #2e1d5e; /* deep accent (fills) */
+  /* ---- workspace accent (vertical slice: one acid-lime accent) ---- */
+  --lime: #c8f542; /* primary accent */
+  --lime-2: #dbff7a; /* bright accent (small text) */
+  --lime-deep: #26330a; /* deep accent (fills) */
+
+  /* ---- console surfaces (cooler neutrals for the shell) ---- */
+  --console: #0c0d11;
+  --console-2: #121319;
+  --console-line: #26282f;
+  --console-line-2: #363942;
+
+  /* ---- accent names kept (untouched sections consume them); repointed to
+     lime so the whole page shares a single accent. Names are not deleted. ---- */
+  --iris: var(--lime);
+  --iris-2: var(--lime-2);
+  --iris-deep: var(--lime-deep);
   --ember: #ff7a52; /* rare signal colour */
 
   /* ---- legacy aliases (kept: other sections consume these) ---- */
@@ -24,8 +37,10 @@
   --backgroundColor: var(--ink);
 
   /* ---- typography ---- */
-  --font-display: "Fraunces", "Times New Roman", Georgia, serif;
+  /* serif retired: the display face is the same clean grotesk as the body */
+  --font-display: "Space Grotesk", system-ui, -apple-system, sans-serif;
   --font-body: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-sans: "Space Grotesk", system-ui, -apple-system, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
 
   --fs-label: 11px;
@@ -88,8 +103,8 @@ h6 {
 }
 
 ::selection {
-  background: var(--iris);
-  color: var(--paper);
+  background: var(--lime);
+  color: var(--ink);
 }
 
 a {
@@ -97,12 +112,12 @@ a {
   text-decoration: inherit;
 }
 
-/* Shared label primitive (mono, tracked, uppercase) */
+/* Shared label primitive: short, sans, tracked, uppercase (never a house voice) */
 .u-label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
+  font-family: var(--font-sans);
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -143,5 +158,15 @@ main {
 @media screen and (min-width: 768px) {
   body {
     --cWidth: 94%;
+  }
+}
+
+/* Reserved gutter for the fixed social rail (see styles/SocialIcons.css).
+   At >=900px the rail sits in the left margin; the content keeps a symmetric
+   56px inset so the 44px rail (left offset <=34px, right edge <=78px) can never
+   overlap a section. Below 900px the rail is hidden, so nothing is reserved. */
+@media screen and (min-width: 900px) {
+  body {
+    --cWidth: calc(94% - 112px);
   }
 }

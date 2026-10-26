@@ -5,14 +5,9 @@ const Contact = () => {
   return (
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
-        <div className="contact-eyebrow">
-          <span className="u-label">08 — Contact</span>
-          <span className="contact-rule" />
-        </div>
+        <span className="u-label contact-eyebrow">08 — Contact</span>
 
-        <h3>
-          Let&rsquo;s build <em>something</em>.
-        </h3>
+        <h3>Let&rsquo;s build something.</h3>
 
         <a
           className="contact-email"
@@ -35,7 +30,7 @@ const Contact = () => {
             <span className="u-label">Elsewhere</span>
             <div className="contact-socials">
               <a
-                href="https://github.com/AFDAlKURNIAWAN"
+                href="https://github.com/radityabhardana"
                 target="_blank"
                 data-cursor="disable"
                 className="contact-social"
@@ -43,7 +38,7 @@ const Contact = () => {
                 Github <MdArrowOutward />
               </a>
               <a
-                href="https://www.linkedin.com"
+                href="https://www.linkedin.com/in/raditya-hardana-962373382/"
                 target="_blank"
                 data-cursor="disable"
                 className="contact-social"
@@ -51,15 +46,7 @@ const Contact = () => {
                 Linkedin <MdArrowOutward />
               </a>
               <a
-                href="https://x.com"
-                target="_blank"
-                data-cursor="disable"
-                className="contact-social"
-              >
-                Twitter <MdArrowOutward />
-              </a>
-              <a
-                href="https://www.instagram.com"
+                href="https://www.instagram.com/zxlyn_16/"
                 target="_blank"
                 data-cursor="disable"
                 className="contact-social"
