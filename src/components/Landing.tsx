@@ -5,34 +5,43 @@ const Landing = ({ children }: PropsWithChildren) => {
   return (
     <div className="landing-section" id="landingDiv">
       <div className="landing-container">
-        <span className="landing-frame" aria-hidden="true" />
+        <div className="landing-grid" aria-hidden="true">
+          <span className="landing-grid-line" />
+          <span className="landing-grid-line" />
+        </div>
 
-        <div className="landing-lane">
-          <div className="landing-intro">
-            <h2 className="landing-kicker">Portfolio — Jakarta, ID</h2>
-            <h1 className="landing-name">
-              <span>Raditya</span>
-              <span className="landing-name-2">Bagus Hardana</span>
-            </h1>
-            <p className="landing-lede">
-              Creative developer working across interface, motion and real-time
-              3D — building considered products with an editorial eye.
-            </p>
+        <div className="landing-intro">
+          <h2 className="landing-kicker">Portofolio — Bogor, ID</h2>
+          <h1 className="landing-name">
+            <span>Raditya</span>
+            <span className="landing-name-2">Bagus Hardana</span>
+          </h1>
+          <p className="landing-lede">
+            Berbekal 2 tahun pengalaman membangun aplikasi web modern, sistem
+            basis data, serta solusi berbasis AI dan teknologi blockchain.
+          </p>
+        </div>
+
+        <div className="landing-info">
+          <div className="landing-role-wrap">
+            <span className="landing-label">Peran</span>
+            <h3 className="landing-role">Software Engineer</h3>
           </div>
 
-          <div className="landing-info">
-            <h3 className="landing-role">Design Engineer</h3>
+          <dl className="landing-spec">
+            <div className="landing-spec-row">
+              <dt>Fokus</dt>
+              <dd>Web · AI · Blockchain</dd>
+            </div>
+            <div className="landing-spec-row">
+              <dt>Domisili</dt>
+              <dd>Bogor, Indonesia</dd>
+            </div>
+          </dl>
 
-            <dl className="landing-spec">
-              <div className="landing-spec-row">
-                <dt>Focus</dt>
-                <dd>Interface · Motion · 3D</dd>
-              </div>
-              <div className="landing-spec-row">
-                <dt>Status</dt>
-                <dd>Open for select work</dd>
-              </div>
-            </dl>
+          <div className="landing-status">
+            <span className="landing-dot" />
+            Siap bekerja
           </div>
         </div>
       </div>

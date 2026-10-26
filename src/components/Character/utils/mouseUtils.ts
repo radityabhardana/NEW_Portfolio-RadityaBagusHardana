@@ -13,6 +13,7 @@ export const handleTouchMove = (
   event: TouchEvent,
   setMousePosition: (x: number, y: number) => void
 ) => {
+  if (!event.touches[0]) return;
   const mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
   const mouseY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
   setMousePosition(mouseX, mouseY);
@@ -50,8 +51,8 @@ export const handleHeadRotation = (
       mouseX * maxRotation,
       interpolationY
     );
-    let minRotationX = -0.3;
-    let maxRotationX = 0.4;
+    const minRotationX = -0.3;
+    const maxRotationX = 0.4;
     if (mouseY > minRotationX) {
       if (mouseY < maxRotationX) {
         headBone.rotation.x = lerp(

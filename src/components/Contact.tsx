@@ -5,53 +5,85 @@ const Contact = () => {
   return (
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
-        <span className="u-label contact-eyebrow">08 — Contact</span>
+        <div className="contact-eyebrow">
+          <span className="u-label">08 — Kontak</span>
+          <span className="contact-rule" />
+          <span className="u-label">Bogor, Indonesia</span>
+        </div>
 
-        <h3>Let&rsquo;s build something.</h3>
+        <h3>
+          Mari wujudkan <em>sesuatu</em>.
+        </h3>
 
         <a
           className="contact-email"
-          href="mailto:raditya.hardana@gmail.com"
+          href="mailto:raditya.bhardana@gmail.com"
           data-cursor="disable"
         >
-          <span>raditya.hardana@gmail.com</span>
+          <span>raditya.bhardana@gmail.com</span>
           <MdArrowOutward />
         </a>
 
         <div className="contact-meta">
           <div className="contact-col">
-            <span className="u-label">Direct</span>
-            <a href="tel:+628123456789" data-cursor="disable">
-              +62 812 3456 7890
-            </a>
+            <span className="u-label">Kontak &amp; Dokumen</span>
+            <div className="contact-socials">
+              <a
+                href="tel:+628892274986"
+                data-cursor="disable"
+                className="contact-social"
+              >
+                +62 889-2274-986
+              </a>
+              <a
+                href="/Raditya-Bagus-Hardana-CV.pdf"
+                download="CV-Raditya-Bagus-Hardana.pdf"
+                data-cursor="disable"
+                className="contact-social"
+              >
+                Unduh CV (PDF) <MdArrowOutward />
+              </a>
+            </div>
           </div>
 
           <div className="contact-col">
-            <span className="u-label">Elsewhere</span>
+            <span className="u-label">Media Sosial</span>
             <div className="contact-socials">
               <a
                 href="https://github.com/radityabhardana"
                 target="_blank"
+                rel="noopener noreferrer"
                 data-cursor="disable"
                 className="contact-social"
               >
-                Github <MdArrowOutward />
+                GitHub <MdArrowOutward />
               </a>
               <a
                 href="https://www.linkedin.com/in/raditya-hardana-962373382/"
                 target="_blank"
+                rel="noopener noreferrer"
                 data-cursor="disable"
                 className="contact-social"
               >
-                Linkedin <MdArrowOutward />
+                LinkedIn <MdArrowOutward />
               </a>
               <a
                 href="https://www.instagram.com/zxlyn_16/"
                 target="_blank"
+                rel="noopener noreferrer"
                 data-cursor="disable"
                 className="contact-social"
               >
                 Instagram <MdArrowOutward />
+              </a>
+              <a
+                href="https://wa.me/628892274986"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="disable"
+                className="contact-social"
+              >
+                WhatsApp <MdArrowOutward />
               </a>
             </div>
           </div>
@@ -61,7 +93,7 @@ const Contact = () => {
           <h5>
             <MdCopyright /> 2026 Raditya Bagus Hardana
           </h5>
-          <span>Designed &amp; developed in Jakarta</span>
+          <span>Dirancang &amp; dikembangkan di Bogor, Indonesia</span>
         </div>
       </div>
     </div>

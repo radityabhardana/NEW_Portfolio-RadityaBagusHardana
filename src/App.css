@@ -28,7 +28,7 @@
 }
 @media only screen and (max-width: 900px) {
   .section-container {
-    width: 500px;
+    width: var(--cWidth);
     max-width: var(--cWidth);
   }
 }

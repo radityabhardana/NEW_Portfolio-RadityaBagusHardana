@@ -2,35 +2,43 @@ import "./styles/WhatIDo.css";
 
 const capabilities = [
   {
-    title: "Develop",
+    index: "01",
+    title: "Pengembangan Web & Perangkat Lunak",
     description:
-      "Building responsive, performant, and interactive web experiences leveraging modern frontend frameworks, 3D graphics, and fluid animations.",
+      "Membangun aplikasi web responsif, perangkat lunak desktop, serta pengelolaan basis data relasional untuk kebutuhan operasional dan produk nyata.",
     tools: [
-      "JavaScript",
-      "TypeScript",
-      "Three.js",
       "React",
-      "CSS",
-      "Node.js",
       "Next.js",
-      "Express.js",
+      "TypeScript",
+      "JavaScript",
       "PHP",
+      "HTML5",
+      "CSS3",
+      "Tailwind CSS",
+      "Bootstrap",
       "MySQL",
+      "SQLite",
+      "Three.js",
+      "Python",
     ],
   },
   {
-    title: "Design",
+    index: "02",
+    title: "Otomasi AI, Blockchain & Interaktif",
     description:
-      "Crafting modern, intuitive user interfaces, digital identities, and interactive 3D visuals that deliver memorable digital experiences.",
+      "Mengoptimalkan pengembangan perangkat lunak dengan agen AI, mengeksplorasi arsitektur & infrastruktur node blockchain, serta merancang antarmuka interaktif 2D/3D.",
     tools: [
-      "Blender",
-      "Zbrush",
-      "UI Design",
-      "Motion",
-      "Rigging",
-      "3D Animation",
-      "Character Design",
-      "Modelling",
+      "Blockchain",
+      "Infrastruktur Node",
+      "Alur Agen AI",
+      "Otomasi AI",
+      "Integrasi API",
+      "Git & GitHub",
+      "Vite",
+      "Godot Engine",
+      "Desain UI/UX",
+      "Figma",
+      "GSAP",
     ],
   },
 ];
@@ -40,8 +48,13 @@ const WhatIDo = () => {
     <div className="whatIDO">
       <div className="what-box">
         <div className="what-head">
-          <span className="u-label">03 — What I do</span>
-          <h2 className="title">Capabilities</h2>
+          <span className="u-label">03 — Keahlian</span>
+          <h2 className="title">
+            B<span className="hat-h2">IDANG</span>
+            <div>
+              F<span className="do-h2">OKUS</span>
+            </div>
+          </h2>
         </div>
       </div>
 
@@ -49,13 +62,19 @@ const WhatIDo = () => {
         <div className="what-box-in">
           {capabilities.map((cap) => (
             <article className="cap" key={cap.title}>
-              <h3 className="cap-title">{cap.title}</h3>
+              <header className="cap-head">
+                <span className="cap-index u-label">{cap.index}</span>
+                <h3 className="cap-title">{cap.title}</h3>
+              </header>
               <p className="cap-desc">{cap.description}</p>
-              <ul className="cap-tools">
-                {cap.tools.map((tool) => (
-                  <li key={tool}>{tool}</li>
-                ))}
-              </ul>
+              <div className="cap-tools">
+                <span className="u-label">Teknologi</span>
+                <ul>
+                  {cap.tools.map((tool) => (
+                    <li key={tool}>{tool}</li>
+                  ))}
+                </ul>
+              </div>
             </article>
           ))}
         </div>

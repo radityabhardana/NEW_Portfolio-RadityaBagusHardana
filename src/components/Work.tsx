@@ -17,18 +17,68 @@ interface WorkItem {
   link?: string;
 }
 
-// Placeholder content — real project data gets dropped in here later.
-const placeholderItem: WorkItem = {
-  title: "Project Name",
-  category: "Category",
-  tools: "Javascript, TypeScript, React, Threejs",
-  image: "/images/placeholder.webp",
-  alt: "",
-};
-
-const workItems: WorkItem[] = Array.from({ length: 6 }, () => ({
-  ...placeholderItem,
-}));
+const workItems: WorkItem[] = [
+  {
+    title: "Portofolio Pribadi",
+    category: "Antarmuka Web",
+    tools: "React, JavaScript, HTML, CSS",
+    image: "/project/portfolio.webp",
+    alt: "Portofolio Pribadi Raditya Bagus Hardana",
+    link: "https://radityabagushardana.netlify.app/",
+  },
+  {
+    title: "Toko Mode Urban Core",
+    category: "Antarmuka Web",
+    tools: "HTML, CSS, JavaScript",
+    image: "/project/urban.webp",
+    alt: "Toko E-commerce Mode Urban Core",
+    link: "https://urbancore.netlify.app",
+  },
+  {
+    title: "Sistem Manajemen Inventaris",
+    category: "Web Fullstack",
+    tools: "PHP, MySQL, JavaScript, HTML, CSS",
+    image: "/project/inventory.webp",
+    alt: "Sistem Manajemen Inventaris",
+    link: "https://github.com/radityabhardana/Inventory-System",
+  },
+  {
+    title: "Aplikasi Pemesanan Tiket Bus",
+    category: "Aplikasi Desktop",
+    tools: "VB.NET",
+    image: "/project/tiketbus.webp",
+    alt: "Aplikasi Pemesanan Tiket Bus",
+    link: "https://github.com/radityabhardana/Pemesanan-Tiket-Bus-VBNET",
+  },
+  {
+    title: "Kloning Web Petani Kode",
+    category: "Antarmuka Web",
+    tools: "HTML, Bootstrap",
+    image: "/project/petanikode.webp",
+    alt: "Kloning Situs Petani Kode",
+  },
+  {
+    title: "Situs Web Rekayasa Antariksa",
+    category: "Antarmuka Web",
+    tools: "HTML, CSS, JavaScript",
+    image: "/project/aether.webp",
+    alt: "Situs Web Rekayasa Antariksa Aether",
+  },
+  {
+    title: "Studi Kasus UI/UX Antariksa",
+    category: "Desain UI/UX",
+    tools: "Figma, Desain Antarmuka",
+    image: "/project/figma.webp",
+    alt: "Studi Kasus Desain UI/UX Antariksa",
+  },
+  {
+    title: "Portal Berita Digital",
+    category: "Antarmuka Web",
+    tools: "HTML, CSS, JavaScript",
+    image: "/project/websiteberita.webp",
+    alt: "Portal Berita Digital",
+  },
+];
 
 const Work = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -74,13 +124,19 @@ const Work = () => {
     <div className="work-section" id="work" ref={containerRef}>
       <div className="work-container section-container">
         <div className="work-header">
-          <span className="u-label work-eyebrow">06 — Work</span>
-          <h2>Selected Work</h2>
+          <div className="work-eyebrow">
+            <span className="u-label">06 — Karya</span>
+            <span className="work-rule" />
+            <span className="u-label">08 proyek</span>
+          </div>
+          <h2>
+            Karya <span>Pilihan</span>
+          </h2>
         </div>
 
         <div className="work-flex" ref={flexRef}>
           {workItems.map((item, index) => (
-            <div className="work-box" key={index}>
+            <div className="work-box" key={item.title}>
               <WorkImage
                 image={item.image}
                 alt={item.alt}
@@ -88,10 +144,14 @@ const Work = () => {
                 link={item.link}
               />
               <div className="work-info">
+                <div className="work-head">
+                  <span className="work-index u-label">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="work-category u-label">{item.category}</span>
+                </div>
                 <h4 className="work-name">{item.title}</h4>
-                <p className="work-tools">
-                  {item.category} — {item.tools}
-                </p>
+                <p className="work-tools">{item.tools}</p>
               </div>
             </div>
           ))}

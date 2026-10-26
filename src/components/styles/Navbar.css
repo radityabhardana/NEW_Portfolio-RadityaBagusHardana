@@ -1,20 +1,20 @@
-/* Top bar: identity on the left, section links + command trigger on the right.
-   No monogram, no telemetry, no indexed links — just a name and the nav. */
-
+/* Top bar — a calm, editorial masthead that reads as a status line. */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--s-4);
-  max-width: var(--cMaxWidth);
-  width: var(--cWidth);
-  padding: var(--s-4) 0;
+  gap: var(--s-3);
+  width: 100%;
+  padding-block: var(--s-4);
+  padding-inline: max(15px, calc((100% - min(var(--cWidth), var(--cMaxWidth))) / 2));
   box-sizing: border-box;
   position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   top: 0;
   z-index: 9999;
+  background: color-mix(in srgb, var(--ink) 80%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 .header::before {
   content: "";
@@ -26,47 +26,43 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--console-line) 30%,
-    var(--console-line) 70%,
+    var(--line) 30%,
+    var(--line) 70%,
     transparent
   );
+  opacity: 0.7;
   pointer-events: none;
 }
 
-/* ---- identity ---- */
-.navbar-title {
-  display: flex;
-  align-items: baseline;
-  gap: var(--s-3);
-  min-width: 0;
-}
-.navbar-name {
-  font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--paper);
+/* ---- left status / home anchor ---- */
+.navbar-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-shrink: 0;
   white-space: nowrap;
-}
-.navbar-role {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
+  color: var(--paper-2);
+  transition: color var(--dur-2) var(--ease-out);
+}
+.navbar-status:hover {
+  color: var(--paper);
+}
+.navbar-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--iris-2);
 }
 
-/* ---- links + command ---- */
-.ws-right {
-  display: flex;
-  align-items: center;
-  gap: var(--s-6);
-}
+/* ---- links ---- */
 .header ul {
   display: flex;
   align-items: center;
-  gap: var(--s-5);
+  gap: var(--s-4);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -75,71 +71,62 @@
   cursor: pointer;
 }
 .header ul a {
-  font-family: var(--font-sans);
-  font-size: 14px;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  font-size: 13px;
+  white-space: nowrap;
   color: var(--paper-2);
   transition: color var(--dur-2) var(--ease-out);
 }
 .header ul a:hover {
-  color: var(--lime);
+  color: var(--paper);
 }
-
-.ws-command {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 6px;
-  border: 1px solid var(--console-line-2);
-  border-radius: var(--r-2);
-  background: transparent;
-  color: var(--ink);
-  cursor: pointer;
-  transition: border-color var(--dur-2) var(--ease-out);
-}
-.ws-command:hover {
-  border-color: var(--lime);
-}
-.ws-command:focus-visible {
-  outline: 2px solid var(--lime);
-  outline-offset: 3px;
-}
-.ws-command-keys {
-  display: inline-flex;
-  gap: 3px;
-}
-.ws-command-keys kbd {
-  display: grid;
-  place-items: center;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 3px;
-  border: 1px solid var(--console-line-2);
-  border-radius: 3px;
-  background: transparent;
-  color: var(--paper-2);
+.navbar-idx {
   font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  transition: color var(--dur-2) var(--ease-out);
 }
-.ws-command:hover .ws-command-keys kbd {
-  color: var(--lime);
-  border-color: color-mix(in srgb, var(--lime) 45%, transparent);
+.header ul a:hover .navbar-idx {
+  color: var(--iris-2);
 }
 
+@media only screen and (max-width: 499px) {
+  .navbar-idx {
+    display: none;
+  }
+  .navbar-status {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .header {
+    padding-block: var(--s-5);
+  }
+  .header ul {
+    gap: var(--s-6);
+  }
+}
+@media only screen and (min-width: 1025px) {
+  .header {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
 @media only screen and (min-width: 1200px) {
   .header {
-    padding: var(--s-5) 0;
+    padding-block: var(--s-6);
   }
-}
-@media only screen and (max-width: 680px) {
-  .navbar-role {
-    display: none;
-  }
-  .ws-right {
-    gap: var(--s-4);
-  }
-}
-@media only screen and (max-width: 520px) {
   .header ul {
-    display: none;
+    gap: var(--s-8);
+  }
+  .header ul a {
+    font-size: 14px;
+    letter-spacing: 0.04em;
   }
 }

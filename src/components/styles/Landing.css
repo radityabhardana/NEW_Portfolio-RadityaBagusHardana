@@ -1,17 +1,11 @@
 /* ============================================================
-   LANDING — a typographic hero with a real 3D subject.
-   The subject is a full-height figure centred in the viewport; the text lives
-   in a single column on the left that is geometrically constrained to end
-   before the subject lane, so no text can ever be occluded.
+   LANDING — "specimen plate" hero
+   Left: masthead (kicker / name / lede)
+   Centre: 3D specimen framed by a hairline plate
+   Right: role + spec sheet + status
    ============================================================ */
 
 .landing-section {
-  /* The subject's rendered half-width is ~0.31 * viewport height (vertical FOV
-     is fixed, so its on-screen size scales with height only). Reserve a little
-     more than that so the text column always stops short of it. */
-  --hero-subject-half: calc(0.32 * 100vh + 32px);
-  --hero-gutter: clamp(24px, 2.6vw, 56px);
-
   width: 100%;
   max-width: var(--cMaxWidth);
   margin: auto;
@@ -26,79 +20,141 @@
   height: 100%;
   position: relative;
   max-width: var(--cMaxWidth);
-  display: flex;
-  align-items: center;
 }
 
-/* ---- lane delimiter: a single hairline at the subject lane's left edge ---- */
-.landing-frame {
+/* ---- background grid: three vertical rules + a baseline ---- */
+.landing-grid {
   position: absolute;
-  z-index: 12;
-  top: 16%;
-  bottom: 16%;
-  left: calc(50% - var(--hero-subject-half));
-  width: 1px;
-  background: var(--line);
+  inset: 0;
+  z-index: 1;
   pointer-events: none;
 }
+.landing-grid::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 78%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--line) 20%,
+    var(--line) 80%,
+    transparent
+  );
+}
+.landing-grid-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--line) 70%, transparent) 12%,
+    color-mix(in srgb, var(--line) 70%, transparent) 88%,
+    transparent
+  );
+}
+.landing-grid-line:nth-child(1) {
+  left: 33.33%;
+}
+.landing-grid-line:nth-child(2) {
+  left: 66.66%;
+}
 
-/* ---- text lane (left) ---- */
-.landing-lane {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-7);
-  width: calc(50% - var(--hero-subject-half) - var(--hero-gutter));
+/* ---- masthead ---- */
+.landing-intro {
+  position: absolute;
+  z-index: 9;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(300px, 44vw, 860px);
 }
 
 .landing-kicker {
-  margin: 0;
-  font-family: var(--font-sans);
-  font-size: 12px;
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--muted);
 }
+.landing-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 26px;
+  height: 1px;
+  background: var(--iris);
+  vertical-align: middle;
+  margin-right: var(--s-3);
+}
 
 .landing-name {
-  margin: var(--s-4) 0 0;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  /* Sized from the available lane (≈ 0.47vw - 0.32vh - gutter) so the longest
-     word always fits: the lane is ~3.8 × the font size at the clamp ceiling. */
-  font-size: clamp(1.6rem, calc(12vw - 8.4vh - 38px), 4.8rem);
+  margin: var(--s-5) 0 0;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 4.8vw, 5.6rem);
   line-height: 0.98;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   color: var(--paper);
 }
 .landing-name span {
   display: block;
 }
 .landing-name-2 {
-  color: var(--paper-2);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--paper);
 }
 
 .landing-lede {
-  margin: var(--s-5) 0 0;
-  font-family: var(--font-sans);
-  font-size: 1rem;
+  margin: var(--s-6) 0 0;
+  max-width: 42ch;
+  font-size: clamp(0.95rem, 1vw, 1.1rem);
   line-height: 1.6;
   color: var(--paper-2);
 }
 
-/* ---- role + facts ---- */
+/* ---- role / spec rail ---- */
 .landing-info {
+  position: absolute;
+  z-index: 9;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(220px, 22vw, 340px);
   display: flex;
   flex-direction: column;
-  gap: var(--s-5);
+  align-items: flex-end;
+  text-align: right;
+  gap: var(--s-6);
+}
+
+.landing-role-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--s-2);
+}
+.landing-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 .landing-role {
-  margin: 0;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: clamp(1.4rem, 2.2vw, 2rem);
-  line-height: 1.05;
-  letter-spacing: -0.015em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 2.6vw, 2.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
   color: var(--paper);
 }
 
@@ -106,36 +162,92 @@
   margin: 0;
   display: flex;
   flex-direction: column;
+  gap: var(--s-3);
+  width: 100%;
 }
 .landing-spec-row {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: var(--s-3) 0;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s-4);
   border-top: 1px solid var(--line);
+  padding-top: var(--s-3);
 }
 .landing-spec-row dt {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted);
 }
 .landing-spec-row dd {
   margin: 0;
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   color: var(--paper-2);
 }
 
-/* ---- the 3D subject (Character plumbing owns the element) ---- */
-/* neutral ground glow — reduced to nothing (glow is not part of the language) */
+.landing-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 7px 14px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-pill);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper-2);
+}
+.landing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ember);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--ember) 60%, transparent);
+  animation: landing-pulse 2.6s var(--ease-out) infinite;
+}
+@keyframes landing-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ember) 55%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+/* ---- the 3D character (specimen subject) ---- */
+.landing-video,
+.landing-image {
+  position: absolute;
+  bottom: 0;
+  height: 95%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.landing-image img {
+  height: 100%;
+  z-index: 2;
+  position: relative;
+}
+
+/* neutral ground glow — replaces the old pink haze blob */
 .character-rim {
   position: absolute;
   width: 460px;
   height: 460px;
   z-index: 1;
-  background: transparent;
+  background: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--iris) 45%, transparent),
+    transparent 62%
+  );
+  filter: blur(38px);
+  border-radius: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, 100%) scale(1.4);
@@ -214,7 +326,8 @@
 
 /* ---- staged entrance for the non-split hero text ---- */
 .landing-lede,
-.landing-spec-row {
+.landing-spec-row,
+.landing-status {
   opacity: 0;
   animation: landing-rise 1s var(--ease-out) forwards;
 }
@@ -227,6 +340,9 @@
 .landing-spec-row:nth-child(2) {
   animation-delay: 0.82s;
 }
+.landing-status {
+  animation-delay: 0.94s;
+}
 @keyframes landing-rise {
   from {
     opacity: 0;
@@ -238,34 +354,85 @@
   }
 }
 
-/* ============================ tablet / mobile ============================ */
+/* ============================ mobile / tablet ============================ */
 @media screen and (max-width: 1024px) {
-  .landing-frame {
+  .landing-section {
+    height: auto;
+    min-height: var(--vh);
+    display: flex;
+    flex-direction: column;
+    padding-top: 64px;
+    padding-bottom: var(--s-8);
+    overflow: hidden;
+  }
+  .landing-grid {
+    display: none;
+  }
+  .character-container {
+    order: -1;
+    position: relative;
+    width: 100%;
+    height: clamp(290px, 44svh, 430px);
+    flex-shrink: 0;
+  }
+  .character-model {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 99%);
+    mask-image: linear-gradient(to bottom, #000 72%, transparent 99%);
+  }
+  .character-model::after,
+  .character-model::before {
     display: none;
   }
   .landing-container {
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: var(--s-9) 0;
-  }
-  .landing-lane {
-    width: 100%;
+    justify-content: flex-start;
     gap: var(--s-6);
+    height: auto;
+    margin-top: -24px;
+    padding: 0;
+  }
+  .landing-intro,
+  .landing-info {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    z-index: 9;
+    transform: none;
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .landing-info {
+    gap: var(--s-5);
+  }
+  .landing-role-wrap {
+    align-items: flex-start;
   }
   .landing-name {
-    font-size: clamp(2.6rem, 11vw, 4.6rem);
+    font-size: clamp(2.5rem, 11vw, 4.6rem);
+    margin-top: var(--s-4);
   }
-  .character-model {
-    height: 78vh;
-    z-index: 0;
-    opacity: 0.9;
+  .landing-lede {
+    font-size: 0.95rem;
+    margin-top: var(--s-4);
   }
 }
 
 @media screen and (max-width: 600px) {
-  .character-model {
-    height: 68vh;
-    bottom: 30px;
+  .landing-spec {
+    align-self: stretch;
+  }
+  .landing-status {
+    align-self: flex-start;
   }
 }
 
@@ -276,6 +443,8 @@
     bottom: 0;
     z-index: 11;
     position: fixed;
+    -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 99%);
+    mask-image: linear-gradient(to bottom, #000 78%, transparent 99%);
   }
   .character-model::after,
   .character-model::before {

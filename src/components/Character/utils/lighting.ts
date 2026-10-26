@@ -2,7 +2,10 @@ import * as THREE from "three";
 import { RGBELoader } from "three-stdlib";
 import { gsap } from "gsap";
 
-const setLighting = (scene: THREE.Scene) => {
+const setLighting = (
+  scene: THREE.Scene,
+  isDisposed: () => boolean = () => false
+) => {
   const directionalLight = new THREE.DirectionalLight(0xa996ff, 0);
   directionalLight.intensity = 0;
   directionalLight.position.set(-0.47, -0.32, -1);
@@ -26,18 +29,30 @@ const setLighting = (scene: THREE.Scene) => {
   frontLight.castShadow = true;
   scene.add(frontLight);
 
+  let envTexture: THREE.DataTexture | null = null;
   new RGBELoader()
     .setPath("/models/")
     .load("char_enviorment.hdr", function (texture) {
+      if (isDisposed()) {
+        texture.dispose();
+        return;
+      }
+      envTexture = texture;
       texture.mapping = THREE.EquirectangularReflectionMapping;
       scene.environment = texture;
       scene.environmentIntensity = 0.8;
       scene.environmentRotation.set(5.76, 85.85, 1);
     });
 
-  function setPointLight(screenLight: any) {
-    if (screenLight?.material && screenLight.material.opacity > 0.9) {
-      pointLight.intensity = screenLight.material.emissiveIntensity * 20;
+  function setPointLight(screenLight: THREE.Object3D | null) {
+    const material = (
+      screenLight as THREE.Mesh<
+        THREE.BufferGeometry,
+        THREE.MeshStandardMaterial
+      > | null
+    )?.material;
+    if (material && material.opacity > 0.9) {
+      pointLight.intensity = material.emissiveIntensity * 20;
     } else {
       pointLight.intensity = 1.5;
     }
@@ -73,7 +88,12 @@ const setLighting = (scene: THREE.Scene) => {
     });
   }
 
-  return { setPointLight, turnOnLights };
+  function dispose() {
+    envTexture?.dispose();
+    envTexture = null;
+  }
+
+  return { setPointLight, turnOnLights, dispose };
 };
 
 export default setLighting;

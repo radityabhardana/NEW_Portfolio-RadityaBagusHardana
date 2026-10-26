@@ -1,13 +1,15 @@
-/* WHAT I DO — a two-column capability ledger. No tabs, no dashed frames:
-   the panels are always present and read as a spec sheet.
-   `.what-box-in` is revealed by GSAP (display none -> flex). */
+/* WHAT I DO — a two-column capability ledger framing the 3D portrait. */
 
 .whatIDO {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: relative;
   opacity: 1;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
+  padding: var(--s-9) 0;
+  box-sizing: border-box;
   width: var(--cWidth);
   max-width: 1920px;
   margin: auto;
@@ -21,66 +23,89 @@
   position: relative;
   z-index: 9;
 }
+.what-box:last-child {
+  justify-content: flex-end;
+}
 .what-head {
   display: flex;
   flex-direction: column;
-  gap: var(--s-5);
+  gap: var(--s-6);
 }
 
 .what-box h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 5.4vw, 6rem);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
   margin: 0;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: clamp(2.4rem, 4.2vw, 4rem);
-  line-height: 1;
-  letter-spacing: -0.025em;
-  color: var(--paper);
+}
+.hat-h2 {
+  font-style: italic;
+  font-weight: 300;
+}
+.do-h2 {
+  color: var(--iris-2);
 }
 
-/* panels container: hidden until the scroll choreography opens it */
 .what-box-in {
-  display: none;
+  display: flex;
   flex-direction: column;
-  gap: var(--s-5);
+  gap: var(--s-6);
   width: 100%;
-  max-width: 640px;
+  max-width: 590px;
   position: relative;
 }
 
 .cap {
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-5);
   display: flex;
   flex-direction: column;
   gap: var(--s-4);
-  padding-top: var(--s-5);
-  border-top: 1px solid var(--line);
+}
+.cap-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-5);
+}
+.cap-index {
+  color: var(--iris-2);
 }
 .cap-title {
-  margin: 0;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: clamp(1.4rem, 2vw, 1.9rem);
-  line-height: 1.05;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 2.6vw, 2.8rem);
+  line-height: 1;
   letter-spacing: -0.01em;
   color: var(--paper);
 }
 .cap-desc {
   margin: 0;
   max-width: 52ch;
-  font-family: var(--font-sans);
   font-size: 0.98rem;
   line-height: 1.6;
   color: var(--paper-2);
 }
 .cap-tools {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.cap-tools ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-2) var(--s-3);
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  color: var(--muted);
+}
+.cap-tools li {
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: var(--paper-2);
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--line);
 }
 
 @media only screen and (max-width: 1024px) {
@@ -93,6 +118,9 @@
   }
   .what-box {
     width: 100%;
+  }
+  .what-box:last-child {
+    justify-content: flex-start;
   }
   .what-box-in {
     max-width: 100%;

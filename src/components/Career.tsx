@@ -4,9 +4,16 @@ const Career = () => {
   return (
     <div className="career-section section-container">
       <div className="career-container">
-        <span className="u-label career-eyebrow">04 — Career</span>
+        <div className="career-eyebrow">
+          <span className="u-label">04 — Pengalaman</span>
+          <span className="career-rule" />
+          <span className="u-label">2 Tahun Pengalaman</span>
+        </div>
 
-        <h2>My career &amp; experience</h2>
+        <h2>
+          Pengalaman <span>&amp;</span>
+          <br /> pendidikan
+        </h2>
 
         <div className="career-info">
           <div className="career-timeline">
@@ -16,42 +23,32 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Frontend & Creative Developer</h4>
-                <h5>Independent / Freelance</h5>
+                <h4>Web Developer &amp; Staf Teknis (PKL)</h4>
+                <h5>PT Kalibrasi Pengujian Indonesia · Januari – Juli 2026 (6 Bulan)</h5>
               </div>
             </div>
-            <h3>2024</h3>
+            <h3>2026</h3>
             <p>
-              Specializing in modern interactive web development, 3D animations,
-              and visually immersive web applications using React, Three.js, and GSAP.
+              Mengembangkan situs web internal menggunakan PHP, Bootstrap, dan
+              MySQL untuk mendukung kebutuhan operasional perusahaan,
+              melaksanakan kegiatan teknis kalibrasi serta pengujian alat ukur,
+              dan mengelola pemindaian maupun pengarsipan data sertifikat.
             </p>
           </div>
 
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Full Stack Developer</h4>
-                <h5>Digital Solutions</h5>
+                <h4>Rekayasa Perangkat Lunak (RPL)</h4>
+                <h5>SMK Bina Mandiri Multimedia · Bogor, Indonesia</h5>
               </div>
             </div>
-            <h3>2025</h3>
+            <h3>2024 – KINI</h3>
             <p>
-              Architected responsive web applications and full-stack solutions,
-              integrating modern REST APIs, databases, and optimized frontend architecture.
-            </p>
-          </div>
-
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Creative Tech & UI Engineer</h4>
-                <h5>Freelance & Open Source</h5>
-              </div>
-            </div>
-            <h3>NOW</h3>
-            <p>
-              Designing and building cutting-edge web interfaces, experimenting with
-              WebGL, shaders, interactive 3D graphics, and responsive UI systems.
+              Mendalami pengembangan perangkat lunak, arsitektur aplikasi web
+              modern, perancangan basis data relasional, serta pemanfaatan agen
+              AI untuk analisis kode, debugging, dan optimasi alur kerja
+              pengembangan.
             </p>
           </div>
         </div>

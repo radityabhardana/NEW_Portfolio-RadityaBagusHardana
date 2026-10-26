@@ -1,31 +1,50 @@
-/* Bottom dock: social links + resume. The old fixed left rail (which
-   overlapped content at wide viewports) is gone. The wrapper is a transparent
-   pass-through layer so it never blocks the page — only the dock is
-   interactive. */
+/* Page furniture: balanced bottom-left social pill and bottom-right resume pill,
+   aligned to the same --cWidth / --cMaxWidth grid as the top navbar. */
 
 .icons-section {
   position: fixed;
-  inset: 0;
-  z-index: 9998;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--cWidth);
+  max-width: var(--cMaxWidth);
+  z-index: 99;
   pointer-events: none;
 }
 
-.social-dock {
-  position: fixed;
-  left: 50%;
-  bottom: clamp(14px, 2.4vh, 26px);
-  transform: translateX(-50%);
-  display: flex;
+/* ---- bottom-left social pill ---- */
+.social-rail {
+  position: absolute;
+  left: 0;
+  bottom: 28px;
+  display: none;
   align-items: center;
-  gap: var(--s-4);
-  padding: 6px 10px;
-  border: 1px solid var(--console-line);
+  gap: var(--s-3);
+  height: 38px;
+  padding: 0 6px 0 14px;
+  box-sizing: border-box;
+  border: 1px solid var(--line-2);
   border-radius: var(--r-pill);
-  background: color-mix(in srgb, var(--console) 82%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 18px 50px -22px rgba(0, 0, 0, 0.9);
+  background-color: color-mix(in srgb, var(--ink) 82%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   pointer-events: auto;
+}
+.social-rail-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1;
+}
+.social-rail-divider {
+  width: 1px;
+  height: 14px;
+  background-color: var(--line-2);
+  flex: none;
 }
 .social-list {
   list-style: none;
@@ -33,43 +52,81 @@
   padding: 0;
   display: flex;
   align-items: center;
-  gap: var(--s-1);
+  gap: 2px;
 }
 .social-list a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
   color: var(--paper-2);
-  border-radius: var(--r-2);
-  transition: color var(--dur-2) var(--ease-out);
+  border-radius: 50%;
+  background-color: transparent;
+  transition: color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
 }
 .social-list a:hover {
-  color: var(--lime);
-}
-.social-list a:focus-visible,
-.resume-button:focus-visible {
-  outline: 2px solid var(--lime);
-  outline-offset: 3px;
+  color: var(--paper);
+  background-color: color-mix(in srgb, var(--iris) 22%, transparent);
+  transform: translateY(-1px);
 }
 
+/* ---- resume pill (bottom-right) ---- */
 .resume-button {
+  position: absolute;
+  right: 0;
+  bottom: 28px;
   display: inline-flex;
   align-items: center;
-  gap: var(--s-2);
-  padding-left: var(--s-4);
-  border-left: 1px solid var(--console-line);
-  font-family: var(--font-sans);
-  font-size: 14px;
+  gap: var(--s-3);
+  height: 38px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: var(--paper-2);
-  transition: color var(--dur-2) var(--ease-out);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-pill);
+  background-color: color-mix(in srgb, var(--ink) 82%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  pointer-events: auto;
+  transition: color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
 }
 .resume-button:hover {
-  color: var(--lime);
+  color: var(--paper);
+  border-color: var(--iris);
+  background-color: color-mix(in srgb, var(--iris) 16%, transparent);
+  transform: translateY(-2px);
 }
 .resume-icon {
   display: inline-flex;
   font-size: 15px;
+  color: var(--iris-2);
+  transition: color var(--dur-2) var(--ease-out);
+}
+.resume-button:hover .resume-icon {
+  color: var(--paper);
+}
+
+@media only screen and (min-width: 900px) {
+  .social-rail {
+    display: inline-flex;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .resume-button {
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    height: 34px;
+    padding: 0 13px;
+  }
 }

@@ -2,6 +2,8 @@ import { SplitText } from "gsap/SplitText";
 import gsap from "gsap";
 import { smoother } from "../Navbar";
 
+let activeLandingSplit: SplitText | null = null;
+
 export function initialFX() {
   document.body.style.overflowY = "auto";
   if (smoother) {
@@ -14,8 +16,12 @@ export function initialFX() {
     delay: 0.1,
   });
 
+  if (activeLandingSplit) {
+    activeLandingSplit.revert();
+  }
+
   // Masthead + role reveal: character-by-character, no rotating loop.
-  const landingText = new SplitText(
+  activeLandingSplit = new SplitText(
     [".landing-info h3", ".landing-intro h2", ".landing-intro h1"],
     {
       type: "chars,lines",
@@ -23,7 +29,7 @@ export function initialFX() {
     }
   );
   gsap.fromTo(
-    landingText.chars,
+    activeLandingSplit.chars,
     { opacity: 0, y: 80, filter: "blur(5px)" },
     {
       opacity: 1,
@@ -45,11 +51,5 @@ export function initialFX() {
       ease: "power1.inOut",
       delay: 0.1,
     }
-  );
-
-  gsap.fromTo(
-    ".landing-frame",
-    { opacity: 0 },
-    { opacity: 1, duration: 1.4, ease: "power2.out", delay: 0.7 }
   );
 }

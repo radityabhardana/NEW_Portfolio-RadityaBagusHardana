@@ -1,5 +1,6 @@
 .cursor-main {
   --size: 0px;
+  opacity: 0;
   position: fixed;
   top: calc(var(--size) / -2);
   left: calc(var(--size) / -2);
@@ -41,7 +42,7 @@
   --size: 0px;
   border-width: 0;
 }
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 600px) and (hover: hover) and (pointer: fine) {
   .cursor-main {
     --size: 52px;
   }

@@ -14,50 +14,58 @@ import setAnimations from "./utils/animationUtils";
 const Scene = () => {
   const canvasDiv = useRef<HTMLDivElement | null>(null);
   const hoverDivRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef(new THREE.Scene());
 
   useEffect(() => {
-    if (canvasDiv.current) {
-      let rect = canvasDiv.current.getBoundingClientRect();
-      let container = { width: rect.width, height: rect.height };
+    const containerEl = canvasDiv.current;
+    if (containerEl) {
+      let disposed = false;
+      let cleanupHover: (() => void) | undefined;
+      const rect = containerEl.getBoundingClientRect();
+      const container = { width: rect.width, height: rect.height };
       const aspect = container.width / container.height;
-      const scene = sceneRef.current;
+      const scene = new THREE.Scene();
 
       const renderer = new THREE.WebGLRenderer({
         alpha: true,
         antialias: true,
       });
       renderer.setSize(container.width, container.height);
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1;
-      canvasDiv.current.appendChild(renderer.domElement);
+      containerEl.appendChild(renderer.domElement);
 
       const camera = new THREE.PerspectiveCamera(14.5, aspect, 0.1, 1000);
-      camera.position.z = 10;
-      camera.position.set(0, 13.1, 24.7);
+      camera.position.set(0, 13.3, 25.2);
       camera.zoom = 1.1;
       camera.updateProjectionMatrix();
 
       let headBone: THREE.Object3D | null = null;
-      let screenLight: any | null = null;
+      let screenLight: THREE.Object3D | null = null;
       let mixer: THREE.AnimationMixer;
 
       const clock = new THREE.Clock();
 
-      const light = setLighting(scene);
-      const { loadCharacter } = setCharacter(renderer, scene, camera);
+      const light = setLighting(scene, () => disposed);
+      const { loadCharacter } = setCharacter(
+        renderer,
+        scene,
+        camera,
+        () => disposed
+      );
 
       let characterObj: THREE.Object3D | null = null;
       const onResize = () => {
         if (characterObj) handleResize(renderer, camera, canvasDiv, characterObj);
       };
       loadCharacter().then((gltf) => {
-        if (gltf) {
+        if (gltf && !disposed) {
           const animations = setAnimations(gltf);
-          hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
+          if (hoverDivRef.current) {
+            cleanupHover = animations.hover(gltf, hoverDivRef.current);
+          }
           mixer = animations.mixer;
-          let character = gltf.scene;
+          const character = gltf.scene;
           characterObj = character;
           scene.add(character);
           headBone = character.getObjectByName("spine006") || null;
@@ -102,6 +110,13 @@ const Scene = () => {
       let rafId = 0;
       const animate = () => {
         rafId = requestAnimationFrame(animate);
+        const bounds = containerEl.getBoundingClientRect();
+        const isOffscreen =
+          containerEl.style.visibility === "hidden" ||
+          bounds.bottom < -100 ||
+          bounds.top > window.innerHeight + 100;
+        if (isOffscreen) return;
+
         if (headBone) {
           handleHeadRotation(
             headBone,
@@ -134,6 +149,8 @@ const Scene = () => {
       };
       animate();
       return () => {
+        disposed = true;
+        cleanupHover?.();
         cancelAnimationFrame(rafId);
         clearTimeout(debounce);
         window.removeEventListener("resize", onResize);
@@ -143,12 +160,12 @@ const Scene = () => {
           landingDiv.removeEventListener("touchstart", onTouchStart);
           landingDiv.removeEventListener("touchend", onTouchEnd);
         }
-        if (canvasDiv.current?.contains(renderer.domElement)) {
-          canvasDiv.current.removeChild(renderer.domElement);
+        if (containerEl.contains(renderer.domElement)) {
+          containerEl.removeChild(renderer.domElement);
         }
+        light.dispose();
         scene.clear();
         renderer.dispose();
-        renderer.forceContextLoss();
       };
     }
   }, []);
