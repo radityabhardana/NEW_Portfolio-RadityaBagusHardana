@@ -1,4 +1,4 @@
-import { FaGithub, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
+import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import { TbNotes } from "react-icons/tb";
 import "./styles/SocialIcons.css";
 
@@ -15,11 +15,6 @@ const socials = [
     name: "Instagram",
     href: "https://www.instagram.com/zxlyn_16/",
     Icon: FaInstagram,
-  },
-  {
-    name: "WhatsApp",
-    href: "https://wa.me/628892274986",
-    Icon: FaWhatsapp,
   },
 ];
 

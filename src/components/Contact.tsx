@@ -26,15 +26,8 @@ const Contact = () => {
 
         <div className="contact-meta">
           <div className="contact-col">
-            <span className="u-label">Kontak &amp; Dokumen</span>
+            <span className="u-label">Dokumen</span>
             <div className="contact-socials">
-              <a
-                href="tel:+628892274986"
-                data-cursor="disable"
-                className="contact-social"
-              >
-                +62 889-2274-986
-              </a>
               <a
                 href="/Raditya-Bagus-Hardana-CV.pdf"
                 download="CV-Raditya-Bagus-Hardana.pdf"
@@ -75,15 +68,6 @@ const Contact = () => {
                 className="contact-social"
               >
                 Instagram <MdArrowOutward />
-              </a>
-              <a
-                href="https://wa.me/628892274986"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor="disable"
-                className="contact-social"
-              >
-                WhatsApp <MdArrowOutward />
               </a>
             </div>
           </div>
