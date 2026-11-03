@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://radityabagushardana.ai.id/sitemap.xml

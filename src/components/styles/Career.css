@@ -29,7 +29,7 @@
   background: var(--line);
 }
 
-.career-section h2 {
+.career-title {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(2.6rem, 5vw, 5rem);
@@ -38,7 +38,7 @@
   color: var(--paper);
   margin: 0 0 var(--s-9);
 }
-.career-section h2 > span {
+.career-title > span {
   font-style: italic;
   font-weight: 300;
   color: var(--iris-2);
@@ -93,7 +93,7 @@
   grid-column: 2;
   grid-row: 1;
 }
-.career-info h3 {
+.career-year {
   grid-column: 1;
   grid-row: 1 / span 2;
   font-family: var(--font-mono);
@@ -106,7 +106,7 @@
   align-self: start;
 }
 
-.career-info h4 {
+.career-role-title {
   font-family: var(--font-display);
   font-size: clamp(1.4rem, 2vw, 2rem);
   line-height: 1.1;
@@ -115,7 +115,7 @@
   margin: 0;
   color: var(--paper);
 }
-.career-info h5 {
+.career-role-sub {
   font-family: var(--font-mono);
   font-size: var(--fs-label);
   font-weight: 500;
@@ -125,7 +125,7 @@
   color: var(--iris-2);
 }
 
-.career-info-box p {
+.career-desc {
   grid-column: 2;
   grid-row: 2;
   max-width: 62ch;
@@ -141,7 +141,7 @@
     padding: var(--s-8) 0;
     margin: 0 auto;
   }
-  .career-section h2 {
+  .career-title {
     margin-bottom: var(--s-7);
   }
 }
@@ -155,10 +155,10 @@
     padding: var(--s-5) 0;
   }
   .career-info-in,
-  .career-info-box p {
+  .career-desc {
     grid-column: 1;
   }
-  .career-info h3 {
+  .career-year {
     grid-row: 1;
     grid-column: 1;
     order: -1;
@@ -166,7 +166,7 @@
   .career-info-in {
     grid-row: 2;
   }
-  .career-info-box p {
+  .career-desc {
     grid-row: 3;
   }
 }

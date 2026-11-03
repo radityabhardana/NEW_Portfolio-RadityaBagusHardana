@@ -52,7 +52,7 @@ const TechStack = () => {
           <span className="techstack-rule" />
           <span className="u-label">Web · Basis Data · AI · Blockchain</span>
         </div>
-        <h2>
+        <h2 className="techstack-title">
           Teknologi <span>Andalan</span>
         </h2>
         <p className="techstack-note">

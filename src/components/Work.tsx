@@ -79,7 +79,7 @@ const Work = () => {
                 : `${String(workItems.length).padStart(2, "0")} proyek`}
             </span>
           </div>
-          <h2>
+          <h2 className="work-title">
             Karya <span>Pilihan</span>
           </h2>
         </div>
@@ -125,7 +125,7 @@ const Work = () => {
                     </span>
                     <span className="work-category u-label">{item.category}</span>
                   </div>
-                  <h4 className="work-name">{item.title}</h4>
+                  <h3 className="work-name">{item.title}</h3>
                   <p className="work-tools">{item.tools}</p>
                 </div>
               </div>

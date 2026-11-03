@@ -19,7 +19,7 @@
   background: var(--line);
 }
 
-.contact-section h3 {
+.contact-title {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(2.6rem, 6vw, 6rem);
@@ -28,7 +28,7 @@
   color: var(--paper);
   margin: 0 0 var(--s-7);
 }
-.contact-section h3 em {
+.contact-title em {
   font-style: italic;
   font-weight: 300;
   color: var(--iris-2);
@@ -124,11 +124,12 @@
   text-transform: uppercase;
   color: var(--muted);
 }
-.contact-foot h5 {
+.contact-copyright {
   display: inline-flex;
   align-items: center;
   gap: var(--s-2);
   margin: 0;
+  font-family: var(--font-body);
   font-weight: 500;
   font-size: inherit;
   letter-spacing: inherit;

@@ -33,7 +33,7 @@
   height: 1px;
   background: var(--line);
 }
-.work-section h2 {
+.work-title {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(2.4rem, 4.4vw, 4.4rem);
@@ -41,7 +41,7 @@
   letter-spacing: -0.02em;
   margin: 0;
 }
-.work-section h2 > span {
+.work-title > span {
   font-style: italic;
   font-weight: 300;
   color: var(--iris-2);

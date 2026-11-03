@@ -22,7 +22,7 @@ export function initialFX() {
 
   // Masthead + role reveal: character-by-character, no rotating loop.
   activeLandingSplit = new SplitText(
-    [".landing-info h3", ".landing-intro h2", ".landing-intro h1"],
+    [".landing-info .landing-role", ".landing-intro .landing-kicker", ".landing-intro h1"],
     {
       type: "chars,lines",
       linesClass: "split-line",

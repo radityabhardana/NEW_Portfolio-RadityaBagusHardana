@@ -23,7 +23,7 @@
   background: var(--line);
 }
 
-.techstack h2 {
+.techstack-title {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(2.4rem, 4.4vw, 4.4rem);
@@ -32,7 +32,7 @@
   margin: 0;
   color: var(--paper);
 }
-.techstack h2 > span {
+.techstack-title > span {
   font-style: italic;
   font-weight: 300;
   color: var(--iris-2);
@@ -149,7 +149,7 @@
   .techstack {
     padding: var(--s-8) 0;
   }
-  .techstack h2 {
+  .techstack-title {
     font-size: 2.2rem;
   }
   .tech-colhead,

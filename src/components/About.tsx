@@ -10,7 +10,7 @@ const About = () => {
           <span className="u-label">Bogor, ID</span>
         </div>
 
-        <h3 className="title">Tentang Saya</h3>
+        <h2 className="title">Tentang Saya</h2>
 
         <p className="para">
           Siswa kelas akhir Rekayasa Perangkat Lunak dengan 2 tahun pengalaman

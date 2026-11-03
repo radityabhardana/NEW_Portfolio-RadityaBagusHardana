@@ -11,9 +11,9 @@ const Contact = () => {
           <span className="u-label">Bogor, Indonesia</span>
         </div>
 
-        <h3>
+        <h2 className="contact-title">
           Mari wujudkan <em>sesuatu</em>.
-        </h3>
+        </h2>
 
         <a
           className="contact-email"
@@ -74,9 +74,9 @@ const Contact = () => {
         </div>
 
         <div className="contact-foot">
-          <h5>
+          <p className="contact-copyright">
             <MdCopyright /> 2026 Raditya Bagus Hardana
-          </h5>
+          </p>
           <span>Dirancang &amp; dikembangkan di Bogor, Indonesia</span>
         </div>
       </div>

@@ -119,7 +119,7 @@ const Certificates = () => {
           <span className="cert-rule" />
           <span className="u-label">06 arsip</span>
         </div>
-        <h2>Sertifikat</h2>
+        <h2 className="cert-heading">Sertifikat</h2>
       </div>
 
       <ul className="cert-grid">

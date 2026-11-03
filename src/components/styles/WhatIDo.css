@@ -32,7 +32,7 @@
   gap: var(--s-6);
 }
 
-.what-box h2 {
+.what-box .title {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(3rem, 5.4vw, 6rem);

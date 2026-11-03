@@ -20,7 +20,7 @@
   height: 1px;
   background: var(--line);
 }
-.cert-head h2 {
+.cert-heading {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(2.4rem, 4.4vw, 4.4rem);
@@ -234,7 +234,7 @@
   .certificates-section {
     padding: var(--s-8) 0;
   }
-  .cert-head h2 {
+  .cert-heading {
     font-size: 2.2rem;
   }
   .cert-grid {
