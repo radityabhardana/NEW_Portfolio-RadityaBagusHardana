@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Laptop mockup — A · isometric · project</title>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 1600px; height: 916px; overflow: hidden;
+    background: radial-gradient(120% 92% at 48% 33%, #0f0e17 0%, #0a090f 60%, #08070c 100%);
+    display: grid; place-items: center;
+  }
+
+  .wrap {
+    position: relative;
+    top: 12px;
+    width: 1000px;
+    perspective: 3000px;
+    perspective-origin: 50% 50%;
+  }
+
+  /* contact shadow: stays on the canvas plane, not in the 3D group */
+  .floor {
+    position: absolute; left: 50%; bottom: -22px;
+    width: 1010px; height: 110px;
+    margin-left: -540px;
+    background: radial-gradient(50% 50% at 52% 40%,
+      rgba(0,0,0,.84) 0%, rgba(0,0,0,.46) 40%, rgba(0,0,0,0) 72%);
+    filter: blur(16px);
+    z-index: 0;
+  }
+
+  .laptop {
+    position: relative; z-index: 1;
+    width: 1000px;
+    transform: rotateY(-14deg) rotateX(3deg);
+    transform-origin: 50% 50%;
+    transform-style: preserve-3d;
+  }
+
+  .lid {
+    position: relative;
+    padding: 17px;
+    border-radius: 16px 16px 3px 3px;
+    background: linear-gradient(178deg, #262435 0%, #1a1824 40%, #12111a 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,.08),
+      inset 2px 1px 1px rgba(255,255,255,.10),
+      inset -1px -1px 0 rgba(0,0,0,.6),
+      0 30px 52px -28px rgba(0,0,0,.95);
+  }
+  /* light falls from the left on the isometric pass */
+  .lid::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    background: linear-gradient(92deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 20%);
+  }
+  .cam {
+    position: absolute; top: 7px; left: 50%; transform: translateX(-50%);
+    width: 4px; height: 4px; border-radius: 50%;
+    background: #3b3650; box-shadow: 0 0 0 1px rgba(0,0,0,.55);
+  }
+
+  /* same box as the empty plate (1600x916) so the chassis never moves */
+  .screen {
+    position: relative;
+    border-radius: 9px; overflow: hidden; background: #000;
+    aspect-ratio: 1600 / 916;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.85), inset 0 0 0 2px rgba(255,255,255,.03);
+  }
+  .screen img {
+    position: absolute; inset: 0;
+    display: block; width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+  }
+
+  /* deck / keyboard hint */
+  .base {
+    position: relative; z-index: 1;
+    height: 30px;
+    margin-top: 0;
+    border-radius: 3px 3px 15px 15px;
+    background: linear-gradient(180deg, #26243a 0%, #1a1824 46%, #0d0c14 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.14),
+      inset 0 -1px 0 rgba(0,0,0,.7),
+      0 4px 8px rgba(0,0,0,.5);
+    overflow: hidden;
+  }
+  .base::before { /* faint key grid */
+    content: ""; position: absolute; inset: 6px 60px 9px 60px; opacity: .3;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 22px, rgba(0,0,0,0) 22px 25px),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 8px, rgba(0,0,0,0) 8px 11px);
+    border-radius: 3px;
+  }
+  .base::after { /* trackpad */
+    content: ""; position: absolute; left: 50%; top: 10px; transform: translateX(-50%);
+    width: 108px; height: 17px; border-radius: 3px;
+    background: rgba(255,255,255,.03);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.045);
+  }
+
+  #measures { position: absolute; left: -9999px; top: 0; width: 1px; height: 1px; overflow: hidden; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="floor" aria-hidden="true"></div>
+    <div class="laptop">
+      <div class="lid">
+        <span class="cam" aria-hidden="true"></span>
+        <div class="screen" id="screen"><img id="shot" alt="" /></div>
+      </div>
+      <div class="base" aria-hidden="true"></div>
+    </div>
+  </div>
+  <div id="measures"></div>
+  <script>
+    var src = new URLSearchParams(location.search).get('src') || 'aether.webp';
+    var shot = document.getElementById('shot');
+    shot.src = '../../public/project/' + src;
+    shot.alt = src.replace('.webp', '') + ' project screenshot';
+
+    addEventListener('load', function () {
+      function r(el) { return el.getBoundingClientRect(); }
+      var s = r(document.getElementById('screen'));
+      var lid = r(document.querySelector('.lid'));
+      var bandTop = 148.4, bandBot = 767.6;
+      var inside = (s.top >= bandTop && s.bottom <= bandBot) ? 'YES' : 'NO';
+      document.getElementById('measures').textContent =
+        'variant=A canvas=1600x916' +
+        ' | src=' + src +
+        ' | screen=' + Math.round(s.left) + ',' + Math.round(s.top) + ',' + Math.round(s.width) + 'x' + Math.round(s.height) +
+        ' | lidProjected=' + Math.round(lid.width) + 'x' + Math.round(lid.height) +
+        ' | band=[' + bandTop + ',' + bandBot + '] screenInBand=' + inside +
+        ' marginTop=' + (s.top - bandTop).toFixed(1) + ' marginBottom=' + (bandBot - s.bottom).toFixed(1) +
+        ' | imgNatural=' + shot.naturalWidth + 'x' + shot.naturalHeight;
+    });
+  </script>
+</body>
+</html>

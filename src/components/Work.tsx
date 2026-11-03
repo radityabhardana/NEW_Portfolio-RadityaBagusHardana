@@ -12,13 +12,57 @@ interface WorkItem {
   title: string;
   category: string;
   tools: string;
+  description: string;
   image: string;
   alt?: string;
   video?: string;
   link?: string;
 }
 
-const workItems: WorkItem[] = [];
+// Data proyek diambil dari repo GitHub pemilik (README + bahasa repo).
+// Kartu terakhir (link GitHub) dirender statis di bawah.
+const workItems: WorkItem[] = [
+  {
+    title: "Inventaris",
+    category: "Sistem Web",
+    tools: "PHP · MySQL · JavaScript",
+    description:
+      "Sistem inventaris berbasis PHP dan MySQL: login multi-peran, pencatatan barang masuk dan keluar, scan barcode, grafik stok, notifikasi, dan ekspor laporan.",
+    image: "/project/mockup-inventory.webp",
+    alt: "Tampilan proyek Inventaris di dalam mockup laptop",
+    link: "https://github.com/radityabhardana/Inventory-System",
+  },
+  {
+    title: "Personal Portfolio",
+    category: "Situs Pribadi",
+    tools: "React · TypeScript · Three.js · GSAP",
+    description:
+      "Situs portofolio 3D: potret WebGL Three.js dengan pencahayaan HDRI, koreografi gulir GSAP ScrollTrigger, dan arsip sertifikat dengan lightbox.",
+    image: "/project/mockup-personalportfolio.webp",
+    alt: "Tampilan proyek Personal Portfolio di dalam mockup laptop",
+    link: "https://github.com/radityabhardana/NEW_Portfolio-RadityaBagusHardana",
+  },
+  {
+    title: "Ragdoll Fighting Championship",
+    category: "Game 3D",
+    tools: "Three.js · Cannon-es · JavaScript",
+    description:
+      "Game tempur 3D di browser: ragdoll aktif berbasis fisika Cannon-es, sistem striking biomekanik, stamina dua lapis, dan AI sparring dengan empat karakter.",
+    image: "/project/mockup-ragdollfightingchampionship.webp",
+    alt: "Tampilan proyek Ragdoll Fighting Championship di dalam mockup laptop",
+    link: "https://github.com/radityabhardana/RagdollFightingChampionship",
+  },
+  {
+    title: "Spectre Motion",
+    category: "Otomasi AI",
+    tools: "Python · Whisper · OpenCV",
+    description:
+      "Pipeline otomasi yang memotong video panjang jadi klip vertikal 9:16: transkripsi Whisper, deteksi momen viral lewat LLM, pelacakan wajah, dan subtitle karaoke.",
+    image: "/project/mockup-spectremotion.webp",
+    alt: "Tampilan proyek Spectre Motion di dalam mockup laptop",
+    link: "https://github.com/radityabhardana/SpectreMotion",
+  },
+];
 
 const Work = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -41,11 +85,18 @@ const Work = () => {
         return Math.max(0, totalCardsWidth - window.innerWidth + containerPadding);
       };
 
+      // jarak tahan setelah kartu terakhir mentok: reel berhenti bergeser,
+      // tapi section masih terpin selama HOLD px supaya kartu GitHub sempat dibaca.
+      const HOLD = 1360;
+
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: container,
           start: "top top",
-          end: () => `+=${getScrollAmount()}`,
+          end: () => {
+            const amount = getScrollAmount();
+            return `+=${amount + (amount > 0 ? HOLD : 0)}`;
+          },
           scrub: 1,
           pin: true,
           pinSpacing: true,
@@ -56,7 +107,12 @@ const Work = () => {
 
       timeline.to(workFlex, {
         x: () => -getScrollAmount(),
-        ease: "none",
+        // geseran selesai lebih awal, sisa progress dipakai untuk diam di tempat
+        ease: (t: number) => {
+          const amount = getScrollAmount();
+          if (amount <= 0) return 1;
+          return Math.min(1, (t * (amount + HOLD)) / amount);
+        },
       });
     },
     { scope: containerRef, dependencies: [isEmpty] }
@@ -111,7 +167,7 @@ const Work = () => {
         ) : (
           <div className="work-flex" ref={flexRef}>
             {workItems.map((item, index) => (
-              <div className="work-box" key={item.title}>
+              <div className="work-box" key={index}>
                 <WorkImage
                   image={item.image}
                   alt={item.alt}
@@ -125,11 +181,60 @@ const Work = () => {
                     </span>
                     <span className="work-category u-label">{item.category}</span>
                   </div>
-                  <h3 className="work-name">{item.title}</h3>
+                  <h3 className="work-name">
+                    {item.link ? (
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-cursor="disable"
+                      >
+                        {item.title}
+                        <MdArrowOutward aria-hidden="true" />
+                      </a>
+                    ) : (
+                      item.title
+                    )}
+                  </h3>
+                  <p className="work-desc">{item.description}</p>
                   <p className="work-tools">{item.tools}</p>
                 </div>
               </div>
             ))}
+
+            {/* Kartu penutup: tautan keluar ke GitHub. Statis, bukan dari workItems,
+                tapi wajib tetap .work-box supaya getScrollAmount ikut menghitungnya. */}
+            <a
+              className="work-box work-box-more"
+              href="https://github.com/radityabhardana"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Lihat lebih banyak di GitHub"
+              data-cursor="disable"
+            >
+              <span className="work-more" aria-hidden="true">
+                <span className="work-more-plate">
+                  <span className="work-more-top u-label">
+                    Lanjutan
+                    <MdArrowOutward className="work-more-arrow" />
+                  </span>
+                  <span className="work-more-word">GitHub</span>
+                  <span className="work-more-url u-label">
+                    github.com/radityabhardana
+                  </span>
+                </span>
+                <span className="work-info">
+                  <span className="work-head">
+                    <span className="work-category u-label">Repositori</span>
+                    <span className="work-index u-label">Eksternal</span>
+                  </span>
+                  <span className="work-name">Lihat lebih banyak di GitHub</span>
+                  <span className="work-tools">
+                    Kode dan eksperimen lain di luar daftar ini.
+                  </span>
+                </span>
+              </span>
+            </a>
           </div>
         )}
       </div>

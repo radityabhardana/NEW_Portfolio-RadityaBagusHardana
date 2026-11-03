@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Laptop mockup — C · laptop + phone</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Space+Grotesk:wght@300..700&display=swap" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    position: relative;
+    width: 1600px; height: 916px; overflow: hidden;
+    background: radial-gradient(120% 92% at 46% 33%, #0f0e17 0%, #0a090f 60%, #08070c 100%);
+  }
+
+  /* ---------- laptop ---------- */
+  .laptop { position: absolute; left: 270px; top: 188px; width: 860px; }
+  .floor {
+    position: absolute; left: 50%; bottom: -26px; transform: translateX(-50%);
+    width: 930px; height: 96px;
+    background: radial-gradient(50% 50% at 50% 40%,
+      rgba(0,0,0,.82) 0%, rgba(0,0,0,.44) 40%, rgba(0,0,0,0) 72%);
+    filter: blur(14px);
+    z-index: 0;
+  }
+  .lid {
+    position: relative; z-index: 1;
+    padding: 16px;
+    border-radius: 15px;
+    background: linear-gradient(180deg, #232132 0%, #1a1824 38%, #12111a 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,.075),
+      inset 0 1px 0 rgba(255,255,255,.13),
+      inset 0 -1px 0 rgba(0,0,0,.65),
+      0 24px 40px -22px rgba(0,0,0,.92);
+  }
+  .cam {
+    position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+    width: 4px; height: 4px; border-radius: 50%;
+    background: #3b3650; box-shadow: 0 0 0 1px rgba(0,0,0,.55);
+  }
+  .screen {
+    border-radius: 8px; overflow: hidden; background: #000;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.85), inset 0 0 0 2px rgba(255,255,255,.028);
+  }
+  .screen img { display: block; width: 100%; height: auto; }
+  .base {
+    position: relative; z-index: 1;
+    margin-top: 7px; height: 26px;
+    border-radius: 3px 3px 13px 13px;
+    background: linear-gradient(180deg, #27253b 0%, #1a1824 44%, #0e0d15 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.15),
+      inset 0 -1px 0 rgba(0,0,0,.7),
+      0 3px 6px rgba(0,0,0,.5);
+  }
+  .base::after {
+    content: ""; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+    width: 60px; height: 4px; border-radius: 0 0 6px 6px; background: rgba(0,0,0,.5);
+  }
+
+  /* ---------- phone ---------- */
+  .phone {
+    position: absolute; left: 1093px; top: 223px;
+    width: 224px; height: 470px;
+    padding: 9px;
+    border-radius: 32px;
+    background: linear-gradient(150deg, #242232 0%, #1a1824 45%, #100f17 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,.085),
+      inset 1px 1px 0 rgba(255,255,255,.10),
+      0 26px 42px -18px rgba(0,0,0,.92);
+    z-index: 3;
+  }
+  .p-floor {
+    position: absolute; left: 50%; bottom: -22px; transform: translateX(-50%);
+    width: 250px; height: 74px;
+    background: radial-gradient(50% 50% at 50% 42%,
+      rgba(0,0,0,.8) 0%, rgba(0,0,0,.4) 42%, rgba(0,0,0,0) 72%);
+    filter: blur(12px);
+    z-index: -1;
+  }
+  .p-screen {
+    position: relative; width: 100%; height: 100%;
+    border-radius: 24px; overflow: hidden; background: #000;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.85), inset 0 0 0 2px rgba(255,255,255,.03);
+  }
+  /* real mobile layout, drawn at phone scale (a cropped desktop shot reads as a bug) */
+  .m {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    padding: 30px 13px 14px;
+    background:
+      radial-gradient(90% 55% at 72% 12%, rgba(169,150,255,.10) 0%, rgba(169,150,255,0) 60%),
+      linear-gradient(180deg, #0d0c14 0%, #0a090f 55%, #08070c 100%);
+    color: var(--paper, #f1eee6);
+    font-family: "Space Grotesk", system-ui, sans-serif;
+  }
+  .m-top { display: flex; align-items: center; justify-content: space-between; }
+  .m-mark { font-size: 8px; letter-spacing: .22em; text-transform: uppercase; color: #f1eee6; }
+  .m-menu { width: 10px; height: 6px; border-top: 1px solid #77728a; border-bottom: 1px solid #77728a; }
+  .m-moon {
+    position: absolute; left: -46px; bottom: 96px; width: 190px; height: 190px; border-radius: 50%;
+    background: radial-gradient(circle at 62% 34%, #262239 0%, #16141f 52%, #0c0b12 78%);
+    box-shadow: inset -14px -18px 34px rgba(0,0,0,.85), inset 8px 8px 30px rgba(169,150,255,.10);
+  }
+  .m-copy { margin-top: auto; position: relative; }
+  .m-kicker {
+    display: block; font-size: 6.5px; letter-spacing: .2em; text-transform: uppercase;
+    color: #a996ff; margin-bottom: 7px;
+  }
+  .m-h {
+    margin: 0; font-family: "Fraunces", Georgia, serif; font-weight: 400;
+    font-size: 25px; line-height: 1.0; letter-spacing: -.01em;
+  }
+  .m-p { margin: 9px 0 0; font-size: 7.5px; line-height: 1.5; color: #c4bfce; }
+  .m-cta {
+    display: inline-block; margin-top: 12px; padding: 5px 11px;
+    border: 1px solid #38334a; border-radius: 999px;
+    font-size: 6.5px; letter-spacing: .16em; text-transform: uppercase; color: #f1eee6;
+  }
+  .notch {
+    position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    width: 74px; height: 17px; border-radius: 0 0 12px 12px;
+    background: #060509; box-shadow: inset 0 -1px 0 rgba(255,255,255,.06);
+  }
+  .p-btn {
+    position: absolute; right: -1px; top: 118px; width: 2px; height: 46px;
+    border-radius: 2px; background: rgba(255,255,255,.10);
+  }
+
+  #measures { position: absolute; left: -9999px; top: 0; width: 1px; height: 1px; overflow: hidden; }
+</style>
+</head>
+<body>
+  <div class="laptop">
+    <div class="floor" aria-hidden="true"></div>
+    <div class="lid">
+      <span class="cam" aria-hidden="true"></span>
+      <div class="screen" id="screen"><img id="shot" src="../img/aether.webp" alt="Aether project screenshot" /></div>
+    </div>
+    <div class="base" aria-hidden="true"></div>
+  </div>
+
+  <div class="phone">
+    <div class="p-floor" aria-hidden="true"></div>
+    <div class="p-screen">
+      <div class="m" aria-hidden="true">
+        <div class="m-top"><span class="m-mark">Aether</span><span class="m-menu"></span></div>
+        <div class="m-moon"></div>
+        <div class="m-copy">
+          <span class="m-kicker">Studio &middot; 2026</span>
+          <h2 class="m-h">Pioneering<br />the Cosmos</h2>
+          <p class="m-p">A quiet interface for a very loud universe.</p>
+          <span class="m-cta">View project</span>
+        </div>
+      </div>
+    </div>
+    <span class="notch" aria-hidden="true"></span>
+    <span class="p-btn" aria-hidden="true"></span>
+  </div>
+
+  <div id="measures"></div>
+  <script>
+    addEventListener('load', function () {
+      function r(el) { return el.getBoundingClientRect(); }
+      var s = r(document.getElementById('screen'));
+      var shot = document.getElementById('shot');
+      var phone = r(document.querySelector('.phone'));
+      var laptop = r(document.querySelector('.laptop'));
+      var bandTop = 148.4, bandBot = 767.6;
+      var inside = (s.top >= bandTop && s.bottom <= bandBot) ? 'YES' : 'NO';
+      var pInside = (phone.top >= bandTop && phone.bottom <= bandBot) ? 'YES' : 'NO';
+      var overlap = (laptop.left + laptop.width) - phone.left;
+      document.getElementById('measures').textContent =
+        'variant=C canvas=1600x916' +
+        ' | screen=' + Math.round(s.left) + ',' + Math.round(s.top) + ',' + Math.round(s.width) + 'x' + Math.round(s.height) +
+        ' | phone=' + Math.round(phone.left) + ',' + Math.round(phone.top) + ',' + Math.round(phone.width) + 'x' + Math.round(phone.height) +
+        ' | phoneOverlap=' + Math.round(overlap) +
+        ' | band=[' + bandTop + ',' + bandBot + '] screenInBand=' + inside + ' phoneInBand=' + pInside +
+        ' marginTop=' + (s.top - bandTop).toFixed(1) + ' marginBottom=' + (bandBot - s.bottom).toFixed(1) +
+        ' | imgNatural=' + shot.naturalWidth + 'x' + shot.naturalHeight;
+    });
+  </script>
+</body>
+</html>

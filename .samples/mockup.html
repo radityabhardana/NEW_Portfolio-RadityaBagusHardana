@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Framing comparison — work plate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300..700&display=swap" />
+<style>
+  :root {
+    --ink: #0a090f;
+    --ink-2: #12111a;
+    --ink-3: #1a1824;
+    --line: #272433;
+    --line-2: #38334a;
+    --paper: #f1eee6;
+    --paper-2: #c4bfce;
+    --muted: #77728a;
+    --iris-2: #a996ff;
+    --font-display: "Fraunces", "Times New Roman", Georgia, serif;
+    --font-body: "Space Grotesk", system-ui, -apple-system, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    padding: 64px;
+  }
+
+  /* ---- header ---- */
+  .kicker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .kicker .live {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--iris-2);          /* the single accent point on the page */
+    flex: 0 0 auto;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    margin: 18px 0 0;
+    max-width: 22ch;
+  }
+  h1 em { font-style: italic; color: var(--paper-2); }
+  .lede {
+    margin: 14px 0 0;
+    max-width: 62ch;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--paper-2);
+  }
+  .rule {
+    height: 1px;
+    background: var(--line);
+    margin: 36px 0 0;
+  }
+
+  /* ---- comparison row ---- */
+  .row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 28px;
+    margin-top: 40px;
+  }
+
+  .variant { margin: 0; flex: 0 0 620px; }
+
+  /* every frame is exactly the real card slot: 620 x 360 */
+  .stage {
+    width: 620px;
+    height: 360px;
+    flex: none;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  .stage img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;   /* match the card: top-proportional crop */
+  }
+
+  /* --- A · flat plate --- */
+  .plate {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow:
+      inset 0 0 0 1px rgba(0, 0, 0, 0.55),
+      inset 0 2px 16px rgba(0, 0, 0, 0.45);
+  }
+
+  /* --- B · browser chrome --- */
+  .browser {
+    display: flex;
+    flex-direction: column;
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .bar {
+    flex: 0 0 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px;
+    background: var(--ink-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .dots { display: flex; gap: 6px; flex: 0 0 auto; }
+  .dots i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line-2);
+  }
+  .url {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .browser .shot {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .browser .shot img { height: 100%; }
+
+  /* --- C · device frame --- */
+  .device {
+    padding: 9px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #0c0b13;
+    position: relative;
+  }
+  .device .cam {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--line-2);
+  }
+  .device .screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    background: var(--ink-2);
+  }
+
+  /* ---- captions ---- */
+  .cap {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 620px;
+  }
+  .cap b {
+    display: block;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .cap span { display: block; }
+
+  footer {
+    margin-top: 44px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  #measures {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="kicker"><span class="live" aria-hidden="true"></span>Work / image framing — comparison</div>
+    <h1>How the shot <em>sits</em> in the plate.</h1>
+    <p class="lede">Three ways to frame the same project screenshot inside the real card slot. Source is <code>public/project/aether.webp</code>, cropped top-proportional with <code>object-fit: cover</code>. Every frame below is the exact card size, 620&times;360 — nothing is scaled.</p>
+    <div class="rule" aria-hidden="true"></div>
+  </header>
+
+  <div class="row">
+    <figure class="variant">
+      <div class="stage plate" data-variant="A">
+        <img src="img/aether.webp" alt="Aether project screenshot, flat plate framing" />
+      </div>
+      <figcaption class="cap">
+        <b>A · Flat plate</b>
+        <span>Most editorial: the image owns the space, only a hairline and a soft well.</span>
+      </figcaption>
+    </figure>
+
+    <figure class="variant">
+      <div class="stage browser" data-variant="B">
+        <div class="bar">
+          <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="url">aether.app/work</div>
+        </div>
+        <div class="shot">
+          <img src="img/aether.webp" alt="Aether project screenshot, browser chrome framing" />
+        </div>
+      </div>
+      <figcaption class="cap">
+        <b>B · Browser chrome</b>
+        <span>Reads as a real site, but the 30px bar steals height from the shot.</span>
+      </figcaption>
+    </figure>
+
+    <figure class="variant">
+      <div class="stage device" data-variant="C">
+        <span class="cam" aria-hidden="true"></span>
+        <div class="screen">
+          <img src="img/aether.webp" alt="Aether project screenshot, minimal device framing" />
+        </div>
+      </div>
+      <figcaption class="cap">
+        <b>C · Device frame</b>
+        <span>Adds product context, yet the bezel crops the edges and dulls the detail.</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <footer>Rendered at card size 620&times;360 · opened via file:// · image source: public/project/aether.webp</footer>
+
+<script>
+  /* Self-check: records the rendered frame sizes so they can be verified without eyeballing. */
+  addEventListener('load', function () {
+    var stages = document.querySelectorAll('.stage');
+    var img = document.querySelector('.stage img');
+    var parts = [];
+    stages.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      parts.push(el.getAttribute('data-variant') + '=' + Math.round(r.width) + 'x' + Math.round(r.height));
+    });
+    parts.push('img=' + img.naturalWidth + 'x' + img.naturalHeight);
+    var out = parts.join(' | ');
+    var m = document.createElement('div');
+    m.id = 'measures';
+    m.textContent = out;
+    document.body.appendChild(m);
+  });
+</script>
+</body>
+</html>

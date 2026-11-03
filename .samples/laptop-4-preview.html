@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<title>Karya Pilihan — 4 kartu, mockup laptop varian A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<style>
+  :root {
+    --ink: #0a090f;
+    --ink-2: #12111a;
+    --line: #272433;
+    --paper: #f1eee6;
+    --paper-2: #c4bfce;
+    --muted: #77728a;
+    --iris-2: #a996ff;
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-mono: "IBM Plex Mono", Consolas, ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 1186px; height: 884px; overflow: hidden;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    padding: 56px 64px 0;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+  .eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+  }
+  .eyebrow i { width: 6px; height: 6px; border-radius: 50%; background: var(--iris-2); }
+  h1 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: 2.6rem; line-height: 1.04; letter-spacing: -0.02em;
+    margin: 14px 0 0;
+  }
+  h1 em { font-style: italic; font-weight: 300; color: var(--iris-2); }
+  .meta {
+    text-align: right; font-size: 11px; line-height: 1.7; color: var(--muted);
+    letter-spacing: 0.04em; padding-bottom: 6px; white-space: nowrap;
+  }
+  .meta b { display: block; color: var(--paper-2); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  .rule { height: 1px; background: var(--line); margin: 26px 0 34px; }
+
+  .grid { display: grid; grid-template-columns: 505px 505px; gap: 30px 48px; }
+  figure { margin: 0; }
+
+  .card {
+    width: 505px; height: 240px;
+    border-radius: 4px; overflow: hidden;
+    background: var(--ink-2);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .card img {
+    display: block; width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+  }
+
+  figcaption {
+    display: flex; align-items: baseline; gap: 14px;
+    margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);
+  }
+  .idx { font-size: 11px; letter-spacing: 0.14em; color: var(--iris-2); }
+  .name { font-family: var(--font-display); font-weight: 400; font-size: 1.1rem; letter-spacing: -0.01em; }
+  .tag { margin-left: auto; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+  footer {
+    position: absolute; left: 64px; right: 64px; bottom: 34px;
+    display: flex; justify-content: space-between;
+    font-size: 10px; letter-spacing: 0.06em; color: var(--muted);
+    padding-top: 16px; border-top: 1px solid var(--line);
+  }
+  footer b { color: var(--paper-2); font-weight: 500; }
+
+  #measures { position: absolute; left: -9999px; top: 0; width: 1px; height: 1px; overflow: hidden; }
+</style>
+</head>
+<body>
+  <header class="head">
+    <div>
+      <div class="eyebrow"><i></i>Karya — preview kartu</div>
+      <h1>Empat karya, <em>satu</em> chassis.</h1>
+    </div>
+    <div class="meta">
+      <b>4 kartu · 505 × 240</b>
+      Varian A · laptop isometrik<br />
+      Kanvas 1600 × 916
+    </div>
+  </header>
+  <div class="rule"></div>
+
+  <main class="grid" id="grid"></main>
+
+  <footer>
+    <span>Mockup varian A — layar diganti screenshot proyek, <b>object-fit: cover / center top</b></span>
+    <span>public/project/mockup-*.webp</span>
+  </footer>
+
+  <div id="measures"></div>
+  <script>
+    var P = [
+      ['inventory', 'Inventaris'],
+      ['personalportfolio', 'Personal Portfolio'],
+      ['ragdollfightingchampionship', 'Ragdoll Fighting'],
+      ['spectremotion', 'Spectre Motion']
+    ];
+    document.getElementById('grid').innerHTML = P.map(function (p, i) {
+      return '<figure>' +
+        '<div class="card"><img src="../public/project/mockup-' + p[0] + '.webp" alt="' + p[1] + ' di dalam mockup laptop" /></div>' +
+        '<figcaption><span class="idx">' + String(i + 1).padStart(2, '0') + '</span>' +
+        '<span class="name">' + p[1] + '</span><span class="tag">Mockup laptop</span></figcaption>' +
+        '</figure>';
+    }).join('');
+
+    addEventListener('load', function () {
+      setTimeout(function () {
+        var boxes = [].map.call(document.querySelectorAll('.card'), function (c) {
+          var r = c.getBoundingClientRect();
+          return Math.round(r.width) + 'x' + Math.round(r.height);
+        });
+        var bad = [].filter.call(document.images, function (im) { return !(im.complete && im.naturalWidth); });
+        document.getElementById('measures').textContent =
+          'cards=' + boxes.join(',') + ' | decoded=' + (document.images.length - bad.length) + '/' + document.images.length +
+          ' | pageH=' + document.body.scrollHeight;
+      }, 250);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Laptop mockups — card slot comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300..700&display=swap" />
+<style>
+  :root {
+    --ink: #0a090f;
+    --ink-2: #12111a;
+    --ink-3: #1a1824;
+    --line: #272433;
+    --line-2: #38334a;
+    --paper: #f1eee6;
+    --paper-2: #c4bfce;
+    --muted: #77728a;
+    --iris-2: #a996ff;
+    --font-display: "Fraunces", "Times New Roman", Georgia, serif;
+    --font-body: "Space Grotesk", system-ui, -apple-system, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    padding: 56px;
+    width: 100%;
+  }
+
+  header { max-width: 1080px; }
+
+  .kicker {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .kicker .live { width: 6px; height: 6px; border-radius: 50%; background: var(--iris-2); flex: 0 0 auto; }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 2.9vw, 2.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 18px 0 0;
+  }
+  h1 em { font-style: italic; color: var(--paper-2); }
+
+  .lede { margin: 14px 0 0; max-width: 74ch; font-size: 0.95rem; line-height: 1.6; color: var(--paper-2); }
+  .lede code { font-family: var(--font-mono); font-size: 0.85em; color: var(--paper); }
+
+  .factline {
+    margin: 22px 0 0;
+    display: flex; flex-wrap: wrap; gap: 8px 26px;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.02em; color: var(--muted);
+  }
+  .factline b { color: var(--paper); font-weight: 500; }
+
+  .rule { height: 1px; background: var(--line); margin: 34px 0 0; }
+
+  /* ---- variant rows ---- */
+  .variant { margin-top: 42px; }
+
+  .vlabel {
+    display: flex; align-items: baseline; gap: 14px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--line);
+  }
+  .vlabel .idx {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+    color: var(--iris-2);
+  }
+  .vlabel .name {
+    font-family: var(--font-display); font-weight: 400; font-size: 1.35rem;
+    letter-spacing: -0.01em; color: var(--paper);
+  }
+  .vlabel .note {
+    margin-left: auto;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.02em;
+    color: var(--muted); text-align: right;
+  }
+
+  .pair { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px; margin-top: 22px; }
+  .fig { margin: 0; }
+  .fig .gap-top { margin-top: 34px; }
+
+  /* real card slot: image plate is ink-2 with a hairline, like .work-image-in */
+  .stage {
+    position: relative;
+    overflow: hidden;
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  .stage.h360 { width: 620px; height: 360px; }
+  .stage.h240 { width: 620px; height: 240px; }
+
+  .stage img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+  /* crop-zone marker on the 360 stage: what disappears at 240 */
+  .cut { position: absolute; left: 0; right: 0; pointer-events: none; }
+  .cut.top { top: 0; height: calc(16.2%); border-bottom: 1px dashed rgba(169,150,255,.55); background: rgba(169,150,255,.05); }
+  .cut.bot { bottom: 0; height: calc(16.2%); border-top: 1px dashed rgba(169,150,255,.55); background: rgba(169,150,255,.05); }
+  .cut span {
+    position: absolute; left: 8px; top: 6px;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
+    color: rgba(169,150,255,.85);
+  }
+  .cut.bot span { top: auto; bottom: 6px; }
+
+  .cap {
+    margin-top: 12px;
+    font-family: var(--font-mono); font-size: 11px; line-height: 1.6; color: var(--muted);
+    max-width: 620px;
+  }
+  .cap b { display: block; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper-2); }
+  .cap .ok { color: #8fd6a6; }
+  .cap .best { color: var(--iris-2); }
+  .cap .warn { color: #e0a56b; }
+
+  footer {
+    margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 11px; line-height: 1.7; letter-spacing: 0.02em; color: var(--muted);
+  }
+  footer b { color: var(--paper-2); font-weight: 500; }
+
+  #measures { position: absolute; left: -9999px; top: 0; width: 1px; height: 1px; overflow: hidden; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="kicker"><span class="live" aria-hidden="true"></span>Work / device mockups — card slot comparison</div>
+    <h1>Screens shown <em>on a laptop.</em></h1>
+    <p class="lede">Three laptop mockups, each rendered on a 1600&times;916 canvas, then dropped into the real card slot twice: at the normal <code>620&times;360</code> and at the short-screen <code>620&times;240</code> (<code>max-height:900px</code>). Both use <code>object-fit:cover</code> with the default centered position, exactly like <code>.work-image img</code>.</p>
+    <div class="factline" id="facts">
+      <span>Source <b>1600&times;916</b></span>
+      <span>Slot at 620 wide &rarr; scaled <b id="f-scaled">355</b>px tall</span>
+      <span>At 240 box &rarr; vertical crop <b id="f-crop">115</b>px total</span>
+      <span>Visible band <b id="f-band">&mdash;</b></span>
+      <span>Crop per side <b id="f-pct">&mdash;</b></span>
+    </div>
+    <div class="rule" aria-hidden="true"></div>
+  </header>
+
+  <main id="rows"></main>
+
+  <section class="variant" id="empty-row">
+    <div class="vlabel">
+      <span class="idx">4</span>
+      <span class="name">Empty frames</span>
+      <span class="note">screen content removed &middot; frame only</span>
+    </div>
+    <div class="pair">
+      <figure class="fig">
+        <div class="stage h360" data-stage="a-empty-360">
+          <img src="img/laptop-a-empty.webp" alt="Laptop isometric, empty screen, at 620x360" />
+        </div>
+        <div class="cap"><b>620 &times; 360 &middot; cover</b><span>A &middot; img/laptop-a-empty.webp</span></div>
+        <div class="stage h240 gap-top" data-stage="a-empty-240">
+          <img src="img/laptop-a-empty.webp" alt="Laptop isometric, empty screen, at 620x240" />
+        </div>
+        <div class="cap"><b>620 &times; 240 &middot; cover</b><span>A &middot; img/laptop-a-empty.webp</span></div>
+      </figure>
+      <figure class="fig">
+        <div class="stage h360" data-stage="c-empty-360">
+          <img src="img/laptop-c-empty.webp" alt="Laptop + phone, empty screens, at 620x360" />
+        </div>
+        <div class="cap"><b>620 &times; 360 &middot; cover</b><span>C &middot; img/laptop-c-empty.webp</span></div>
+        <div class="stage h240 gap-top" data-stage="c-empty-240">
+          <img src="img/laptop-c-empty.webp" alt="Laptop + phone, empty screens, at 620x240" />
+        </div>
+        <div class="cap"><b>620 &times; 240 &middot; cover</b><span>C &middot; img/laptop-c-empty.webp</span></div>
+      </figure>
+    </div>
+  </section>
+
+  <footer>
+    <b>Safe-zone rule.</b> The dashed violet bands on each 360 frame mark what the 240 box removes.
+    The laptop screen is kept inside the surviving middle band on every variant, so no screen pixel is lost.
+    <br />
+    <b>Note.</b> At viewports &ge;1400px the real plate is narrower than 620px (<code>.work-box</code> has 56px side padding, so the image is ~508px wide).
+    These frames test the stricter 620px geometry, so the crop above is the worst case.
+    <br />
+    Opened via file:// &middot; images: img/laptop-a.webp, laptop-b.webp, laptop-c.webp, laptop-a-empty.webp, laptop-c-empty.webp
+  </footer>
+
+  <div id="measures"></div>
+
+  <script>
+    var V = [
+      { id: 'a', file: 'img/laptop-a.webp', name: 'Laptop, isometric',  note: 'rotateY(-14deg) · rotateX(3deg)',
+        verdict: 'ok', text: 'Tilted 3D body; deck hint + key grid. Reads most like a stock mockup template.' },
+      { id: 'b', file: 'img/laptop-b.webp', name: 'Laptop, straight on', note: 'symmetric · no tilt',
+        verdict: 'best', text: 'Cleanest silhouette and the most even coverage — safest across all eight cards.' },
+      { id: 'c', file: 'img/laptop-c.webp', name: 'Laptop + phone',      note: 'phone overlaps right edge',
+        verdict: 'ok', text: 'Most product context: the phone carries a hand-built mobile view, not a stretched crop.' }
+    ];
+
+    var SOURCE_W = 1600, SOURCE_H = 916, BOX_W = 620, BOX_H_SHORT = 240, BOX_H_TALL = 360;
+    var scaled = BOX_W * (SOURCE_H / SOURCE_W);                 // 355.0
+    var cropPerSide = Math.max(0, (scaled - BOX_H_SHORT) / 2);  // 57.5
+    var pct = (cropPerSide / scaled) * 100;                     // 16.2%
+    var bandTop = pct / 100 * SOURCE_H;                         // 148.4
+    var bandBot = SOURCE_H - bandTop;                           // 767.6
+
+    // fill the header facts
+    function set(id, v) { document.getElementById(id).textContent = v; }
+    set('f-scaled', scaled.toFixed(1));
+    set('f-crop', (cropPerSide * 2).toFixed(1));
+    set('f-band', 'y ' + bandTop.toFixed(1) + '–' + bandBot.toFixed(1));
+    set('f-pct', pct.toFixed(1) + '% top / ' + pct.toFixed(1) + '% bottom');
+
+    var host = document.getElementById('rows');
+    V.forEach(function (v, i) {
+      var el = document.createElement('section');
+      el.className = 'variant';
+      el.innerHTML =
+        '<div class="vlabel">' +
+          '<span class="idx">' + (i + 1) + '</span>' +
+          '<span class="name">' + v.name + '</span>' +
+          '<span class="note">' + v.note + '</span>' +
+        '</div>' +
+        '<div class="pair">' +
+          '<figure class="fig">' +
+            '<div class="stage h360" data-stage="' + v.id + '-360">' +
+              '<img src="' + v.file + '" alt="' + v.name + ' at 620x360" />' +
+              '<div class="cut top"><span>cut at 240</span></div>' +
+              '<div class="cut bot"><span>cut at 240</span></div>' +
+            '</div>' +
+            '<figcaption class="cap"><b>620 &times; 360 &middot; cover</b><span>Normal card height. Dashed = lost on short screens.</span></figcaption>' +
+          '</figure>' +
+          '<figure class="fig">' +
+            '<div class="stage h240" data-stage="' + v.id + '-240">' +
+              '<img src="' + v.file + '" alt="' + v.name + ' at 620x240" />' +
+            '</div>' +
+            '<figcaption class="cap"><b>620 &times; 240 &middot; cover</b>' +
+            '<span class="' + (v.verdict === 'best' ? 'best' : 'ok') + '">' + v.text + '</span></figcaption>' +
+          '</figure>' +
+        '</div>';
+      host.appendChild(el);
+    });
+
+    // self-check: real rendered sizes + whether each stage formed and each image decoded
+    addEventListener('load', function () {
+      setTimeout(function () {
+        var parts = [];
+        parts.push('canvas=' + window.innerWidth + 'x' + window.innerHeight);
+        document.querySelectorAll('.stage').forEach(function (st) {
+          var r = st.getBoundingClientRect();
+          var im = st.querySelector('img');
+          parts.push(st.getAttribute('data-stage') + '=' + Math.round(r.width) + 'x' + Math.round(r.height) +
+            '(decoded:' + (im.complete && im.naturalWidth > 0 ? im.naturalWidth + 'x' + im.naturalHeight : 'no') + ')');
+        });
+        parts.push('scaledH=' + scaled.toFixed(1));
+        parts.push('band=[' + bandTop.toFixed(1) + ',' + bandBot.toFixed(1) + ']');
+        parts.push('cropPerSide=' + cropPerSide.toFixed(1) + 'px');
+        parts.push('cropPctPerSide=' + pct.toFixed(2) + '%');
+        parts.push('pageH=' + document.body.scrollHeight);
+        document.getElementById('measures').textContent = parts.join(' | ');
+        document.title = 'READY ' + document.body.scrollHeight;
+      }, 300);
+    });
+  </script>
+</body>
+</html>

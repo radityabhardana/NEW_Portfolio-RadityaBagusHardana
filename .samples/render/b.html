@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Laptop mockup — B · front</title>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 1600px; height: 916px; overflow: hidden;
+    background: radial-gradient(120% 92% at 50% 33%, #0f0e17 0%, #0a090f 60%, #08070c 100%);
+    display: grid; place-items: center;
+  }
+
+  .laptop { position: relative; width: 980px; }
+
+  /* single soft contact shadow under the body */
+  .floor {
+    position: absolute; left: 50%; bottom: -30px; transform: translateX(-50%);
+    width: 1040px; height: 110px;
+    background: radial-gradient(50% 50% at 50% 40%,
+      rgba(0,0,0,.82) 0%, rgba(0,0,0,.46) 40%, rgba(0,0,0,0) 72%);
+    filter: blur(15px);
+    z-index: 0;
+  }
+
+  .lid {
+    position: relative; z-index: 1;
+    padding: 16px;
+    border-radius: 15px;
+    background: linear-gradient(180deg, #232132 0%, #1a1824 38%, #12111a 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,.075),
+      inset 0 1px 0 rgba(255,255,255,.13),
+      inset 0 -1px 0 rgba(0,0,0,.65),
+      0 26px 44px -24px rgba(0,0,0,.92);
+  }
+  .cam {
+    position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+    width: 4px; height: 4px; border-radius: 50%;
+    background: #3b3650; box-shadow: 0 0 0 1px rgba(0,0,0,.55);
+  }
+
+  .screen {
+    border-radius: 8px; overflow: hidden; background: #000;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.85), inset 0 0 0 2px rgba(255,255,255,.028);
+  }
+  .screen img { display: block; width: 100%; height: auto; }
+
+  .base {
+    position: relative; z-index: 1;
+    margin-top: 7px;
+    height: 26px;
+    border-radius: 3px 3px 13px 13px;
+    background: linear-gradient(180deg, #27253b 0%, #1a1824 44%, #0e0d15 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.15),
+      inset 0 -1px 0 rgba(0,0,0,.7),
+      0 3px 6px rgba(0,0,0,.5);
+  }
+  .base::after {
+    content: ""; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+    width: 66px; height: 4px; border-radius: 0 0 6px 6px; background: rgba(0,0,0,.5);
+  }
+
+  #measures { position: absolute; left: -9999px; top: 0; width: 1px; height: 1px; overflow: hidden; }
+</style>
+</head>
+<body>
+  <div class="laptop">
+    <div class="floor" aria-hidden="true"></div>
+    <div class="lid">
+      <span class="cam" aria-hidden="true"></span>
+      <div class="screen" id="screen"><img id="shot" src="../img/aether.webp" alt="Aether project screenshot" /></div>
+    </div>
+    <div class="base" id="base" aria-hidden="true"></div>
+  </div>
+  <div id="measures"></div>
+  <script>
+    addEventListener('load', function () {
+      function r(el) { return el.getBoundingClientRect(); }
+      var s = r(document.getElementById('screen'));
+      var lid = r(document.querySelector('.lid'));
+      var base = r(document.getElementById('base'));
+      var shot = document.getElementById('shot');
+      var bandTop = 148.4, bandBot = 767.6;
+      var inside = (s.top >= bandTop && s.bottom <= bandBot) ? 'YES' : 'NO';
+      document.getElementById('measures').textContent =
+        'variant=B canvas=1600x916' +
+        ' | screen=' + Math.round(s.left) + ',' + Math.round(s.top) + ',' + Math.round(s.width) + 'x' + Math.round(s.height) +
+        ' | lid=' + Math.round(lid.width) + 'x' + Math.round(lid.height) +
+        ' | bodyTop=' + Math.round(lid.top) + ' bodyBot=' + Math.round(base.bottom) +
+        ' | band=[' + bandTop + ',' + bandBot + '] screenInBand=' + inside +
+        ' marginTop=' + (s.top - bandTop).toFixed(1) + ' marginBottom=' + (bandBot - s.bottom).toFixed(1) +
+        ' | imgNatural=' + shot.naturalWidth + 'x' + shot.naturalHeight;
+    });
+  </script>
+</body>
+</html>

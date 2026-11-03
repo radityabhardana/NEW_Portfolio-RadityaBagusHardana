@@ -1,0 +1,37 @@
+<!doctype html>
+<meta charset="utf-8" />
+<iframe id="f1" src="render/a.html" width="1600" height="916" style="border:0"></iframe>
+<iframe id="f2" src="render/a-empty.html" width="1600" height="916" style="border:0"></iframe>
+<div id="out">pending</div>
+<script>
+  function pick(w) {
+    var d = w.document, r = w.getBoundingClientRect ? null : null;
+    function box(el) { var b = el.getBoundingClientRect(); return Math.round(b.left) + ',' + Math.round(b.top) + ' ' + Math.round(b.width) + 'x' + Math.round(b.height); }
+    var screen = d.getElementById('screen');
+    var img = d.getElementById('shot');
+    return {
+      lidH: d.querySelector('.lid').offsetHeight,
+      lidW: d.querySelector('.lid').offsetWidth,
+      screenH: screen.offsetHeight,
+      screenW: screen.offsetWidth,
+      wrapH: d.querySelector('.wrap').offsetHeight,
+      laptopH: d.querySelector('.laptop').offsetHeight,
+      bodyH: d.body.scrollHeight,
+      screenBox: box(screen),
+      lidBox: box(d.querySelector('.lid')),
+      imgH: img ? img.getBoundingClientRect().height.toFixed(2) : 'none',
+      imgBox: img ? box(img) : 'none'
+    };
+  }
+  var done = 0;
+  function go() {
+    if (++done < 2) return;
+    var a = pick(document.getElementById('f1').contentWindow);
+    var b = pick(document.getElementById('f2').contentWindow);
+    var lines = [];
+    Object.keys(a).forEach(function (k) { lines.push(k + ': A=' + a[k] + ' | empty=' + b[k] + (String(a[k]) === String(b[k]) ? '  ==' : '  <<<')); });
+    document.getElementById('out').textContent = lines.join('\n');
+  }
+  document.getElementById('f1').onload = go;
+  document.getElementById('f2').onload = go;
+</script>
